@@ -429,9 +429,6 @@
     .features-bar { padding: 18px 14px; }
     .explore-grid { grid-template-columns: 1fr; }
   }
-
-  /* ── CUSTOM CURSOR ── */
-  * { cursor: none !important; }
   .cursor-dot {
     position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99999;
     width: 8px; height: 8px; border-radius: 50%;
@@ -466,6 +463,9 @@
   .cursor-glow.hovered  { width: 200px; height: 200px; opacity: 1; }
   .cursor-ring.clicking { width: 24px; height: 24px; border-color: rgba(255,255,255,0.9); transition: width 0.08s, height 0.08s; }
   .cursor-dot.clicking  { width: 4px; height: 4px; background: #fff; }
+
+  /* CURSOR OVERRIDE - must be last */
+  *, *::before, *::after { cursor: none !important; }
 </style>
 </head>
 <body>
