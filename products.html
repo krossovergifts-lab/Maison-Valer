@@ -3,19 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Maison Valer – Premium leather lifestyle essentials.">
-<title>Products – Maison Valer</title>
+<meta name="description" content="Maison Valér – Premium leather lifestyle essentials. Organizers, card holders, travel wallets, luggage tags and power banks crafted for professionals.">
+<title>Products – Maison Valér</title>
 <style>
   @font-face { font-family: 'Code Bold'; src: url('fonts/CodeBold.woff2') format('woff2'), url('fonts/CodeBold.woff') format('woff'), url('fonts/CodeBold.ttf') format('truetype'); font-weight: bold; font-style: normal; }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root { --burnt: #c1440e; --gold: #e8903a; --cream: #f5ede0; --dark: #0d0905; --text: #e8ddd0; --muted: #9e8a75; --border: rgba(200,140,60,0.2); --font: 'Code Bold', 'Trebuchet MS', sans-serif; --pad: clamp(20px, 5vw, 60px); }
+  :root {
+    --burnt: #c1440e; --gold: #e8903a; --cream: #f5ede0;
+    --dark: #0d0905; --text: #e8ddd0; --muted: #9e8a75;
+    --border: rgba(200,140,60,0.2);
+    --font: 'Code Bold', 'Trebuchet MS', sans-serif;
+    --pad: clamp(20px, 5vw, 60px);
+  }
   html { scroll-behavior: smooth; }
   body { font-family: var(--font); background: var(--dark); color: var(--text); overflow-x: hidden; }
   img { max-width: 100%; display: block; }
+
+  /* ── BACKGROUNDS ── */
   .bg-orb { position: fixed; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(ellipse 60% 50% at 70% 15%, rgba(180,70,10,0.35) 0%, transparent 65%), radial-gradient(ellipse 40% 40% at 20% 80%, rgba(100,40,5,0.25) 0%, transparent 60%), radial-gradient(ellipse 80% 80% at 50% 50%, rgba(10,5,2,0) 0%, #0d0905 100%); }
   .bg-grid { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.04; background-image: linear-gradient(rgba(200,140,60,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(200,140,60,0.5) 1px, transparent 1px); background-size: 60px 60px; }
   .bg-diamonds { position: fixed; right: 0; top: 0; width: 180px; height: 100vh; z-index: 0; pointer-events: none; opacity: 0.1; background-image: repeating-linear-gradient(45deg, rgba(180,90,20,0.6) 0px, rgba(180,90,20,0.6) 2px, transparent 2px, transparent 30px), repeating-linear-gradient(-45deg, rgba(180,90,20,0.6) 0px, rgba(180,90,20,0.6) 2px, transparent 2px, transparent 30px); }
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 var(--pad); height: 70px; background: linear-gradient(180deg, rgba(10,6,2,0.97) 0%, rgba(10,6,2,0.7) 100%); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); gap: 16px; }
+
+  /* ── NAV ── */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 0 var(--pad); height: 70px; background: linear-gradient(180deg, rgba(10,6,2,0.97) 0%, rgba(10,6,2,0.7) 100%); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); gap: 16px; }
   .nav-logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
   .nav-logo img { height: 44px; width: auto; }
   .nav-links { display: flex; gap: clamp(20px, 3vw, 48px); list-style: none; }
@@ -29,18 +39,74 @@
   .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .nav-hamburger.open span:nth-child(2) { opacity: 0; }
   .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-  .nav-mobile { display: none; position: fixed; top: 70px; left: 0; right: 0; background: rgba(10,6,2,0.98); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); flex-direction: column; padding: 24px var(--pad); gap: 4px; z-index: 99; }
+  .nav-mobile { display: none; position: fixed; top: 70px; left: 0; right: 0; background: rgba(10,6,2,0.98); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); flex-direction: column; padding: 24px var(--pad); gap: 4px; z-index: 199; }
   .nav-mobile.open { display: flex; }
   .nav-mobile a { font-family: var(--font); font-size: 15px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding: 14px 0; border-bottom: 1px solid var(--border); transition: color 0.3s; }
   .nav-mobile a:last-of-type { border-bottom: none; }
   .nav-mobile a:hover { color: var(--gold); }
   .mobile-search { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 20px; padding: 10px 16px; margin-top: 12px; }
   .mobile-search input { background: none; border: none; outline: none; font-family: var(--font); font-size: 13px; color: var(--text); flex: 1; }
+
+  /* ── SHARED ── */
   section { position: relative; z-index: 1; }
   .btn-primary { display: inline-block; font-family: var(--font); font-size: clamp(11px,1.1vw,13px); letter-spacing: 0.2em; text-transform: uppercase; color: var(--dark); background: var(--gold); padding: 12px 28px; border-radius: 24px; text-decoration: none; border: none; cursor: pointer; transition: background 0.3s, transform 0.2s; }
   .btn-primary:hover { background: var(--burnt); transform: translateY(-2px); }
-  .btn-outline { display: inline-block; font-family: var(--font); font-size: clamp(11px,1.1vw,13px); letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold); padding: 12px 28px; border-radius: 24px; text-decoration: none; cursor: pointer; transition: all 0.3s; }
+  .btn-outline { display: inline-block; font-family: var(--font); font-size: clamp(11px,1.1vw,13px); letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold); padding: 12px 28px; border-radius: 24px; text-decoration: none; cursor: pointer; transition: all 0.3s; background: none; }
   .btn-outline:hover { background: var(--gold); color: var(--dark); }
+  .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── PAGE HERO ── */
+  .page-hero { min-height: 38vh; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; padding: 110px var(--pad) 48px; position: relative; overflow: hidden; }
+  .page-hero-bg { position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse 70% 80% at 80% 30%, rgba(180,70,10,0.3) 0%, transparent 70%); }
+  .page-hero-eyebrow { font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block; }
+  .page-hero h1 { font-size: clamp(40px,7vw,96px); letter-spacing: 0.04em; color: var(--cream); line-height: 0.95; }
+  .page-hero p { font-size: clamp(10px,1.1vw,13px); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); line-height: 1.9; max-width: 520px; margin-top: 20px; }
+
+  /* ── FILTER BAR ── */
+  .products-section { padding: clamp(40px,6vw,80px) var(--pad); }
+  .products-inner { max-width: 1200px; margin: 0 auto; }
+  .filter-bar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; align-items: center; }
+  .filter-btn { font-family: var(--font); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 24px; padding: 9px 20px; cursor: pointer; transition: all 0.3s; }
+  .filter-btn:hover, .filter-btn.active, .filter-btn[aria-pressed="true"] { background: rgba(232,144,58,0.15); border-color: var(--gold); color: var(--gold); }
+  .filter-count { font-family: var(--font); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-left: auto; padding-right: 4px; flex-shrink: 0; }
+  .filter-count strong { color: var(--gold); font-weight: normal; }
+
+  /* ── PRODUCT GRID ── */
+  .product-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+  .product-card { background: rgba(20,13,6,0.88); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; transition: border-color 0.3s, transform 0.3s; cursor: pointer; }
+  .product-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .product-card.is-hidden { display: none; }
+  .product-card-img { width: 100%; aspect-ratio: 4/3; overflow: hidden; background: rgba(10,6,2,0.5); position: relative; }
+  .product-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+  .product-card:hover .product-card-img img { transform: scale(1.06); }
+  .product-card-tag { position: absolute; top: 12px; left: 12px; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; background: rgba(232,144,58,0.9); color: var(--dark); padding: 4px 10px; border-radius: 12px; }
+  .product-card-body { padding: 20px; }
+  .product-card-body h3 { font-size: clamp(14px,1.4vw,18px); letter-spacing: 0.08em; color: var(--cream); margin-bottom: 4px; }
+  .product-sku { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--burnt); margin-bottom: 8px; display: block; }
+  .product-card-body p { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+  .product-card-footer { display: flex; align-items: center; justify-content: space-between; }
+  .product-colors { display: flex; gap: 6px; }
+  .color-dot { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); }
+  .color-dot.brown { background: #8B4513; }
+  .color-dot.gray  { background: #7a7065; }
+  .color-dot.black { background: #222; }
+  .color-dot.green { background: #2e5c3e; }
+  .color-dot.blue  { background: #2c3e6b; }
+  .enquire-btn { font-family: var(--font); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--border); border-radius: 16px; padding: 7px 16px; cursor: pointer; transition: all 0.3s; background: none; }
+  .enquire-btn:hover { background: var(--gold); color: var(--dark); border-color: var(--gold); }
+  .product-empty { display: none; grid-column: 1 / -1; text-align: center; padding: 60px 20px; background: rgba(20,13,6,0.6); border: 1px dashed var(--border); border-radius: 18px; }
+  .product-empty.is-visible { display: block; }
+  .product-empty h3 { font-size: clamp(18px,2.2vw,26px); letter-spacing: 0.06em; color: var(--cream); margin-bottom: 8px; }
+  .product-empty p { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); line-height: 1.8; margin-bottom: 20px; max-width: 420px; margin-left: auto; margin-right: auto; }
+
+  /* ── CTA BAND ── */
+  .cta-band { margin-top: 64px; background: rgba(20,13,6,0.88); border: 1px solid var(--border); border-radius: 20px; padding: clamp(32px,4vw,56px); display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+  .cta-band h2 { font-size: clamp(22px,3vw,40px); letter-spacing: 0.04em; color: var(--cream); line-height: 1.1; }
+  .cta-band p { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; margin-top: 8px; max-width: 440px; }
+  .cta-band-actions { display: flex; gap: 12px; flex-wrap: wrap; flex-shrink: 0; }
+
+  /* ── FOOTER ── */
   footer { padding: clamp(48px,6vw,80px) var(--pad) clamp(24px,4vw,40px); background: linear-gradient(180deg,transparent 0%,rgba(8,4,2,0.97) 30%); border-top: 1px solid var(--border); position: relative; z-index: 1; }
   .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: clamp(24px,4vw,48px); max-width: 1200px; margin: 0 auto clamp(36px,5vw,60px); }
   .footer-brand img { height: 40px; width: auto; margin-bottom: 6px; }
@@ -53,69 +119,127 @@
   .footer-col ul { list-style: none; }
   .footer-col ul li { font-size: 13px; color: var(--muted); margin-bottom: 10px; transition: color 0.2s; cursor: pointer; letter-spacing: 0.05em; }
   .footer-col ul li a { color: inherit; text-decoration: none; }
-  .footer-col ul li a:hover { color: var(--gold); }
+  .footer-col ul li a:hover, .footer-col ul li:hover { color: var(--gold); }
   .footer-bottom { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding-top: 20px; border-top: 1px solid var(--border); }
   .footer-bottom span { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; }
   .lang-selector { display: flex; align-items: center; gap: 8px; font-size: 12px; letter-spacing: 0.12em; color: var(--muted); background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; cursor: pointer; }
   .footer-watermark { position: absolute; right: 0; bottom: 0; font-size: clamp(80px,14vw,200px); line-height: 0.8; color: rgba(180,90,20,0.05); pointer-events: none; user-select: none; }
-  .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
-  .fade-up.visible { opacity: 1; transform: translateY(0); }
-  @media (min-width: 1400px) { .footer-grid { max-width: 1320px; } }
-  @media (max-width: 1199px) { .nav-search input { width: 90px; } .footer-grid { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; } }
-  @media (max-width: 900px) { .nav-links,.nav-search { display: none; } .nav-hamburger { display: flex; } nav { height: 64px; } .nav-mobile { top: 64px; } .product-grid { grid-template-columns: repeat(2,1fr); } .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; } .footer-brand { grid-column: 1 / -1; } }
-  @media (max-width: 600px) { :root { --pad: 18px; } nav { height: 60px; } .nav-logo img { height: 36px; } .nav-mobile { top: 60px; } .product-grid { grid-template-columns: 1fr; } .cta-band { flex-direction: column; } .footer-grid { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; text-align: center; } }
-  .cursor-dot { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99999; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); transform: translate(-50%, -50%); transition: width 0.15s ease, height 0.15s ease, background 0.2s ease; }
-  .cursor-ring { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99998; width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid rgba(232,144,58,0.55); transform: translate(-50%, -50%); transition: width 0.35s cubic-bezier(0.25,1,0.5,1), height 0.35s cubic-bezier(0.25,1,0.5,1), border-color 0.3s ease; box-shadow: 0 0 18px 2px rgba(232,144,58,0.12); }
-  .cursor-glow { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99997; width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle, rgba(232,144,58,0.18) 0%, rgba(193,68,14,0.06) 50%, transparent 75%); transform: translate(-50%, -50%); transition: width 0.5s ease, height 0.5s ease, opacity 0.4s ease; opacity: 0.7; }
-  .cursor-dot.hovered { width: 12px; height: 12px; background: #fff; }
-  .cursor-ring.hovered { width: 56px; height: 56px; border-color: rgba(232,144,58,0.95); box-shadow: 0 0 32px 8px rgba(232,144,58,0.28), inset 0 0 16px rgba(232,144,58,0.1); }
+
+  /* ──────────────────────────────────────────
+     PRODUCT DETAIL MODAL
+  ────────────────────────────────────────── */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(5,3,1,0.9);
+    backdrop-filter: blur(18px);
+    display: flex; align-items: center; justify-content: center;
+    padding: clamp(12px,3vw,40px);
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s ease;
+    overflow-y: auto;
+  }
+  .modal-overlay.is-open { opacity: 1; pointer-events: all; }
+  .modal {
+    background: linear-gradient(145deg, rgba(22,14,6,0.99), rgba(14,9,3,0.99));
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    width: 100%; max-width: 1000px;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: translateY(28px) scale(0.96);
+    transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+  .modal-overlay.is-open .modal { transform: translateY(0) scale(1); }
+  /* close strip */
+  .modal-close-strip {
+    position: sticky; top: 0; z-index: 10;
+    display: flex; justify-content: flex-end;
+    padding: 16px 20px 0;
+  }
+  .modal-close-btn {
+    background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+    border-radius: 50%; width: 38px; height: 38px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 16px; cursor: pointer;
+    transition: all 0.25s; line-height: 1;
+  }
+  .modal-close-btn:hover { background: rgba(232,144,58,0.2); border-color: var(--gold); color: var(--gold); }
+  /* two-col body */
+  .modal-body { display: grid; grid-template-columns: 1fr 1fr; min-height: 420px; }
+  /* left: image */
+  .modal-img-col { position: relative; overflow: hidden; min-height: 320px; border-right: 1px solid var(--border); }
+  .modal-img-col img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .modal-img-badge {
+    position: absolute; top: 16px; left: 16px;
+    font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+    background: rgba(232,144,58,0.92); color: var(--dark);
+    padding: 5px 12px; border-radius: 12px; font-family: var(--font);
+  }
+  /* right: info */
+  .modal-info-col { padding: clamp(22px,4vw,42px); display: flex; flex-direction: column; }
+  .modal-eyebrow { font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--burnt); margin-bottom: 8px; display: block; }
+  .modal-title { font-size: clamp(18px,2.4vw,32px); letter-spacing: 0.05em; color: var(--cream); line-height: 1.1; margin-bottom: 5px; font-family: var(--font); }
+  .modal-sku { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; display: block; }
+  .modal-tagline { font-size: clamp(9px,0.95vw,11px); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); line-height: 1.9; margin-bottom: 20px; border-left: 2px solid var(--gold); padding-left: 13px; }
+  .modal-label { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; display: block; }
+  .modal-features { list-style: none; margin-bottom: 18px; display: flex; flex-direction: column; gap: 7px; }
+  .modal-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); line-height: 1.65; }
+  .modal-features li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); margin-top: 5px; flex-shrink: 0; }
+  .modal-divider { height: 1px; background: var(--border); margin: 16px 0; }
+  .modal-colors-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+  .modal-swatch {
+    display: flex; align-items: center; gap: 7px;
+    font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted);
+    background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+    border-radius: 20px; padding: 6px 12px; font-family: var(--font);
+  }
+  .modal-swatch .sw { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .modal-print { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; line-height: 1.6; }
+  .modal-print b { color: var(--text); font-weight: normal; }
+  .modal-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; padding-top: 6px; }
+  .modal-btn-primary { font-family: var(--font); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dark); background: var(--gold); padding: 11px 22px; border-radius: 22px; text-decoration: none; border: none; cursor: pointer; transition: background 0.3s, transform 0.2s; flex: 1; text-align: center; }
+  .modal-btn-primary:hover { background: var(--burnt); transform: translateY(-2px); }
+  .modal-btn-outline { font-family: var(--font); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold); padding: 11px 22px; border-radius: 22px; background: none; cursor: pointer; transition: all 0.3s; white-space: nowrap; }
+  .modal-btn-outline:hover { background: var(--gold); color: var(--dark); }
+  /* thumb strip */
+  .modal-thumbs { display: flex; gap: 8px; padding: 14px 16px; border-top: 1px solid var(--border); overflow-x: auto; background: rgba(8,5,2,0.6); scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+  .modal-thumb { width: 60px; height: 60px; flex-shrink: 0; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); cursor: pointer; transition: border-color 0.25s; }
+  .modal-thumb:hover, .modal-thumb.active { border-color: var(--gold); }
+  .modal-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* ── CURSOR ── */
+  .cursor-dot  { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99999; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); transform: translate(-50%,-50%); transition: width .15s, height .15s, background .2s; }
+  .cursor-ring { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99998; width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid rgba(232,144,58,0.55); transform: translate(-50%,-50%); transition: width .35s cubic-bezier(.25,1,.5,1), height .35s cubic-bezier(.25,1,.5,1), border-color .3s; box-shadow: 0 0 18px 2px rgba(232,144,58,0.12); }
+  .cursor-glow { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99997; width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle,rgba(232,144,58,0.18) 0%,rgba(193,68,14,0.06) 50%,transparent 75%); transform: translate(-50%,-50%); transition: width .5s, height .5s, opacity .4s; opacity: .7; }
+  .cursor-dot.hovered  { width: 12px; height: 12px; background: #fff; }
+  .cursor-ring.hovered { width: 56px; height: 56px; border-color: rgba(232,144,58,0.95); box-shadow: 0 0 32px 8px rgba(232,144,58,0.28); }
   .cursor-glow.hovered { width: 200px; height: 200px; opacity: 1; }
-  .cursor-ring.clicking { width: 24px; height: 24px; border-color: rgba(255,255,255,0.9); transition: width 0.08s, height 0.08s; }
-  .cursor-dot.clicking { width: 4px; height: 4px; background: #fff; }
-  .page-hero { min-height: 38vh; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; padding: 110px var(--pad) 48px; position: relative; overflow: hidden; }
-  .page-hero-bg { position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse 70% 80% at 80% 30%, rgba(180,70,10,0.3) 0%, transparent 70%); }
-  .page-hero-eyebrow { font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block; }
-  .page-hero h1 { font-size: clamp(40px,7vw,96px); letter-spacing: 0.04em; color: var(--cream); line-height: 0.95; }
-  .page-hero p { font-size: clamp(10px,1.1vw,13px); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); line-height: 1.9; max-width: 520px; margin-top: 20px; }
-  .section-label { font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block; }
-  .products-section { padding: clamp(40px,6vw,80px) var(--pad); }
-  .products-inner { max-width: 1200px; margin: 0 auto; }
-  .filter-bar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
-  .filter-btn { font-family: var(--font); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 24px; padding: 9px 20px; cursor: pointer; transition: all 0.3s; }
-  .filter-btn:hover, .filter-btn.active { background: rgba(232,144,58,0.15); border-color: var(--gold); color: var(--gold); }
-  .product-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
-  .product-card { background: rgba(20,13,6,0.88); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
-  .product-card:hover { border-color: var(--gold); transform: translateY(-4px); }
-  .product-card-img { width: 100%; aspect-ratio: 4/3; overflow: hidden; background: rgba(10,6,2,0.5); position: relative; }
-  .product-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
-  .product-card:hover .product-card-img img { transform: scale(1.06); }
-  .product-card-tag { position: absolute; top: 12px; left: 12px; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; background: rgba(232,144,58,0.85); color: var(--dark); padding: 4px 10px; border-radius: 12px; }
-  .product-card-body { padding: 20px; }
-  .product-card-body h3 { font-size: clamp(14px,1.4vw,18px); letter-spacing: 0.08em; color: var(--cream); margin-bottom: 6px; }
-  .product-card-body p { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
-  .product-card-footer { display: flex; align-items: center; justify-content: space-between; }
-  .product-colors { display: flex; gap: 6px; }
-  .color-dot { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); }
-  .color-dot.brown { background: #8B4513; }
-  .color-dot.gray { background: #7a7065; }
-  .color-dot.black { background: #222; }
-  .enquire-btn { font-family: var(--font); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--border); border-radius: 16px; padding: 7px 16px; cursor: pointer; transition: all 0.3s; background: none; }
-  .enquire-btn:hover { background: var(--gold); color: var(--dark); border-color: var(--gold); }
-  .cta-band { margin-top: 64px; background: rgba(20,13,6,0.88); border: 1px solid var(--border); border-radius: 20px; padding: clamp(32px,4vw,56px); display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
-  .cta-band h2 { font-size: clamp(22px,3vw,40px); letter-spacing: 0.04em; color: var(--cream); line-height: 1.1; }
-  .cta-band p { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; margin-top: 8px; max-width: 440px; }
-  .cta-band-actions { display: flex; gap: 12px; flex-wrap: wrap; flex-shrink: 0; }
+  .cursor-ring.clicking { width: 24px; height: 24px; border-color: rgba(255,255,255,0.9); transition: width .08s, height .08s; }
+  .cursor-dot.clicking  { width: 4px; height: 4px; background: #fff; }
+
+  /* ── RESPONSIVE ── */
+  @media (min-width: 1400px) { .products-inner, .footer-grid { max-width: 1320px; } }
+  @media (max-width: 1199px) { .nav-search input { width: 90px; } .footer-grid { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; } }
+  @media (max-width: 960px)  { .modal-body { grid-template-columns: 1fr; } .modal-img-col { min-height: 240px; border-right: none; border-bottom: 1px solid var(--border); } }
+  @media (max-width: 900px)  { .nav-links, .nav-search { display: none; } .nav-hamburger { display: flex; } nav { height: 64px; } .nav-mobile { top: 64px; } .product-grid { grid-template-columns: repeat(2,1fr); } .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; } .footer-brand { grid-column: 1 / -1; } }
+  @media (max-width: 600px)  { :root { --pad: 18px; } nav { height: 60px; } .nav-logo img { height: 36px; } .nav-mobile { top: 60px; } .product-grid { grid-template-columns: 1fr; } .cta-band { flex-direction: column; } .footer-grid { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; text-align: center; } .modal-actions { flex-direction: column; } .modal-btn-primary, .modal-btn-outline { flex: none; width: 100%; text-align: center; } }
+  @media (max-width: 400px)  { .modal-info-col { padding: 18px; } }
+  body.modal-open { overflow: hidden; }
   *, *::before, *::after { cursor: none !important; }
 </style>
 </head>
 <body>
   <div class="cursor-glow" id="cursorGlow"></div>
   <div class="cursor-ring" id="cursorRing"></div>
-  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-dot"  id="cursorDot"></div>
   <div class="bg-orb"></div>
   <div class="bg-grid"></div>
   <div class="bg-diamonds"></div>
 
+<!-- NAV -->
 <nav>
   <a href="/" class="nav-logo">
     <img src="https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2Fmaison%20valer.svg?alt=media&token=56dd5471-f149-43c2-ab6a-345004a6deab" alt="Maison Valér">
@@ -146,6 +270,7 @@
   </div>
 </div>
 
+<!-- PAGE HERO -->
 <section class="page-hero">
   <div class="page-hero-bg"></div>
   <span class="page-hero-eyebrow">Our Collection</span>
@@ -153,120 +278,178 @@
   <p>Premium leather and lifestyle pieces crafted for professionals who value restraint, quality, and detail.</p>
 </section>
 
+<!-- PRODUCTS -->
 <section class="products-section">
   <div class="products-inner">
+
     <div class="filter-bar fade-up">
-      <button class="filter-btn active">All</button>
-      <button class="filter-btn">Leather Notebooks</button>
-      <button class="filter-btn">Executive Bags</button>
-      <button class="filter-btn">Power Banks</button>
-      <button class="filter-btn">Tech Accessories</button>
-      <button class="filter-btn">Luggage &amp; Travel</button>
+      <button type="button" class="filter-btn active" data-filter="all"         aria-pressed="true">All</button>
+      <button type="button" class="filter-btn"        data-filter="notebooks"   aria-pressed="false">Leather Notebooks</button>
+      <button type="button" class="filter-btn"        data-filter="power"       aria-pressed="false">Power Banks</button>
+      <button type="button" class="filter-btn"        data-filter="accessories" aria-pressed="false">Tech Accessories</button>
+      <button type="button" class="filter-btn"        data-filter="travel"      aria-pressed="false">Luggage &amp; Travel</button>
+      <span class="filter-count" id="filterCount" aria-live="polite"><strong>6</strong> products</span>
     </div>
 
     <div class="product-grid">
-      <div class="product-card fade-up">
+
+      <!-- 1 · Executive Organizer -->
+      <div class="product-card fade-up" data-category="notebooks" data-product="organizer">
         <div class="product-card-img">
-          <img src="https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FFeatured%20Product.png?alt=media&token=4bcfa093-3ec7-45b9-9727-b279a5dabef4" alt="Executive Organizer">
+          <img src="https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FFeatured%20Product.png?alt=media&token=4bcfa093-3ec7-45b9-9727-b279a5dabef4" alt="Executive Organizer" loading="lazy">
           <span class="product-card-tag">Bestseller</span>
         </div>
         <div class="product-card-body">
           <h3>Executive Organizer</h3>
-          <p>Premium leather notebook with magnetic pen holder and branding-ready surface.</p>
+          <span class="product-sku">REXORA-11653</span>
+          <p>Organizer with magnetic pen holder — designed for work, travel &amp; executive gifting.</p>
           <div class="product-card-footer">
-            <div class="product-colors"><div class="color-dot brown"></div><div class="color-dot gray"></div><div class="color-dot black"></div></div>
-            <a href="/contact" class="enquire-btn">Enquire</a>
+            <div class="product-colors">
+              <div class="color-dot brown" title="Brown"></div>
+              <div class="color-dot black" title="Black"></div>
+              <div class="color-dot gray"  title="Gray"></div>
+            </div>
+            <button class="enquire-btn" onclick="event.stopPropagation();openModal('organizer')">View Details</button>
           </div>
         </div>
       </div>
 
-      <div class="product-card fade-up">
+      <!-- 2 · Leather Gift Set Collection -->
+      <div class="product-card fade-up" data-category="notebooks" data-product="giftset">
         <div class="product-card-img">
-          <img src="https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FLEATHER%20COLECTION.png?alt=media&token=35ccf2d5-634b-4430-bef1-dafa8dd75bd3" alt="Leather Collection">
-          <span class="product-card-tag">New</span>
+          <img src="https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FLEATHER%20COLECTION.png?alt=media&token=35ccf2d5-634b-4430-bef1-dafa8dd75bd3" alt="Leather Gift Set Collection" loading="lazy">
+          <span class="product-card-tag">Gift Set</span>
         </div>
         <div class="product-card-body">
-          <h3>Leather Collection</h3>
-          <p>Refined leather essentials designed for the modern executive lifestyle.</p>
+          <h3>Leather Gift Set Collection</h3>
+          <span class="product-sku">Desk to Destinations — 2026</span>
+          <p>Curated leather essentials for professionals who value order, movement, and presence.</p>
           <div class="product-card-footer">
-            <div class="product-colors"><div class="color-dot brown"></div><div class="color-dot black"></div></div>
-            <a href="/contact" class="enquire-btn">Enquire</a>
+            <div class="product-colors">
+              <div class="color-dot brown" title="Brown"></div>
+              <div class="color-dot black" title="Black"></div>
+              <div class="color-dot gray"  title="Gray"></div>
+            </div>
+            <button class="enquire-btn" onclick="event.stopPropagation();openModal('giftset')">View Details</button>
           </div>
         </div>
       </div>
 
-      <div class="product-card fade-up">
+      <!-- 3 · MagSafe Card Holder -->
+      <div class="product-card fade-up" data-category="accessories" data-product="magsafe">
         <div class="product-card-img">
-          <img src="https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FEXECUTIVE%20BAGS.png?alt=media&token=d983728c-6117-43d9-9d8d-f4265cd43295" alt="Executive Bags">
+          <img src="https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FCard%20Wallet.png?alt=media&token=2966d450-9969-4909-83bb-ea8e30cda3bf" alt="MagSafe Card Holder" loading="lazy">
         </div>
         <div class="product-card-body">
-          <h3>Executive Bags</h3>
-          <p>Structured carry pieces crafted for work, travel, and everything between.</p>
+          <h3>MagSafe Card Holder</h3>
+          <span class="product-sku">Magtec-11659</span>
+          <p>Magnetic phone wallet with slim leather profile — MagSafe-compatible, branding-ready.</p>
           <div class="product-card-footer">
-            <div class="product-colors"><div class="color-dot gray"></div><div class="color-dot black"></div></div>
-            <a href="/contact" class="enquire-btn">Enquire</a>
+            <div class="product-colors">
+              <div class="color-dot brown" title="Brown"></div>
+              <div class="color-dot black" title="Black"></div>
+              <div class="color-dot gray"  title="Gray"></div>
+            </div>
+            <button class="enquire-btn" onclick="event.stopPropagation();openModal('magsafe')">View Details</button>
           </div>
         </div>
       </div>
 
-      <div class="product-card fade-up">
+      <!-- 4 · Leather Luggage Tag -->
+      <div class="product-card fade-up" data-category="travel" data-product="luggagetag">
         <div class="product-card-img">
-          <img src="https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FLuggage%20tag.png?alt=media&token=de6e9e98-cdbd-4fea-aab4-70869e7e417c" alt="Luggage Tag">
+          <img src="https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FLuggage%20tag.png?alt=media&token=de6e9e98-cdbd-4fea-aab4-70869e7e417c" alt="Leather Luggage Tag" loading="lazy">
           <span class="product-card-tag">Customisable</span>
         </div>
         <div class="product-card-body">
-          <h3>Luggage Tag</h3>
-          <p>Brand-ready leather luggage tags for corporate gifting and travel.</p>
+          <h3>Leather Luggage Tag</h3>
+          <span class="product-sku">Letheg-11658</span>
+          <p>Refined professional presence with concealed ID area — ideal for corporate gifting.</p>
           <div class="product-card-footer">
-            <div class="product-colors"><div class="color-dot brown"></div><div class="color-dot gray"></div><div class="color-dot black"></div></div>
-            <a href="/contact" class="enquire-btn">Enquire</a>
+            <div class="product-colors">
+              <div class="color-dot brown" title="Brown"></div>
+              <div class="color-dot black" title="Black"></div>
+              <div class="color-dot gray"  title="Gray"></div>
+            </div>
+            <button class="enquire-btn" onclick="event.stopPropagation();openModal('luggagetag')">View Details</button>
           </div>
         </div>
       </div>
 
-      <div class="product-card fade-up">
+      <!-- 5 · Premium Travel Wallet -->
+      <div class="product-card fade-up" data-category="travel" data-product="travelwallet">
         <div class="product-card-img">
-          <img src="https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FCard%20Wallet.png?alt=media&token=2966d450-9969-4909-83bb-ea8e30cda3bf" alt="Card Wallet">
+          <img src="https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FPOWER%20BANKS.png?alt=media&token=c74e1d30-a64c-4d87-9139-2c879729d3ae" alt="Premium Travel Wallet" loading="lazy">
+          <span class="product-card-tag">New</span>
         </div>
         <div class="product-card-body">
-          <h3>Card Wallet</h3>
-          <p>Slim card wallet with your logo, elegantly executed.</p>
+          <h3>Premium Travel Wallet</h3>
+          <span class="product-sku">Leport-11662</span>
+          <p>Multifunctional passport holder with pen slot and inner pockets for travel essentials.</p>
           <div class="product-card-footer">
-            <div class="product-colors"><div class="color-dot brown"></div><div class="color-dot gray"></div></div>
-            <a href="/contact" class="enquire-btn">Enquire</a>
+            <div class="product-colors">
+              <div class="color-dot brown" title="Brown"></div>
+              <div class="color-dot black" title="Black"></div>
+              <div class="color-dot gray"  title="Gray"></div>
+            </div>
+            <button class="enquire-btn" onclick="event.stopPropagation();openModal('travelwallet')">View Details</button>
           </div>
         </div>
       </div>
 
-      <div class="product-card fade-up">
+      <!-- 6 · MagFoldra Power Bank -->
+      <div class="product-card fade-up" data-category="power" data-product="magfoldra">
         <div class="product-card-img">
-          <img src="https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FPower%20Bank.png?alt=media&token=0547b68a-71a0-4b08-a972-5f3c47ecc9b5" alt="Power Bank">
+          <img src="https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FPower%20Bank.png?alt=media&token=0547b68a-71a0-4b08-a972-5f3c47ecc9b5" alt="MagFoldra Power Bank" loading="lazy">
           <span class="product-card-tag">Tech</span>
         </div>
         <div class="product-card-body">
-          <h3>Wireless Power Bank</h3>
-          <p>Compact wireless charging power bank. Branding-ready for corporate gifting.</p>
+          <h3>MagFoldra Power Bank</h3>
+          <span class="product-sku">MagFoldra-11655</span>
+          <p>MagSafe foldable power bank — 5000mAh with 15W wireless charging &amp; card holder.</p>
           <div class="product-card-footer">
-            <div class="product-colors"><div class="color-dot gray"></div><div class="color-dot black"></div></div>
-            <a href="/contact" class="enquire-btn">Enquire</a>
+            <div class="product-colors">
+              <div class="color-dot gray"  title="Gray"></div>
+              <div class="color-dot blue"  title="Navy"></div>
+              <div class="color-dot green" title="Green"></div>
+            </div>
+            <button class="enquire-btn" onclick="event.stopPropagation();openModal('magfoldra')">View Details</button>
           </div>
         </div>
+      </div>
+
+      <div class="product-empty" id="productEmpty">
+        <h3>No products in this category yet</h3>
+        <p>We're expanding the collection. Get in touch and we'll keep you posted.</p>
+        <a href="/contact" class="btn-outline">Talk to us</a>
       </div>
     </div>
 
     <div class="cta-band fade-up">
       <div>
         <h2>Need a Custom Corporate Gift?</h2>
-        <p>We will work with your brand to create bespoke gifting solutions with logo embossing, packaging, and bulk pricing.</p>
+        <p>We work with your brand to create bespoke gifting solutions — logo embossing, premium packaging, and bulk pricing for orders of 50+ units.</p>
       </div>
       <div class="cta-band-actions">
         <a href="/contact" class="btn-primary">Get a Quote</a>
-        <a href="/about" class="btn-outline">Learn More</a>
+        <a href="/about"   class="btn-outline">Learn More</a>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ── PRODUCT DETAIL MODAL ── -->
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal" id="modalBox">
+    <div class="modal-close-strip">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close product detail">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-thumbs" id="modalThumbs" style="display:none"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
 <footer>
   <div class="footer-watermark">MV</div>
   <div class="footer-grid">
@@ -282,7 +465,7 @@
     </div>
     <div class="footer-col">
       <h4>Explore Collection</h4>
-      <ul><li><a href="/products">Categories</a></li><li><a href="#">Blogs</a></li><li><a href="#">Materials</a></li><li><a href="/contact">Customize</a></li></ul>
+      <ul><li><a href="/products">Categories</a></li><li><a href="#">Catalogue</a></li><li><a href="#">Materials</a></li><li><a href="/contact">Customize</a></li></ul>
     </div>
     <div class="footer-col">
       <h4>Get in Touch</h4>
@@ -300,31 +483,208 @@
 </footer>
 
 <script>
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
-  hamburger.addEventListener('click', (e) => { e.stopPropagation(); hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
-  function closeMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); }
-  document.addEventListener('click', (e) => { if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) closeMenu(); });
-  const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }); }, { threshold: 0.08 });
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-  document.querySelectorAll('.filter-btn').forEach(function(btn) { btn.addEventListener('click', function() { document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); }); btn.classList.add('active'); }); });
+/* ─── NAV ─── */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', e => { e.stopPropagation(); hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
+function closeMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); }
+document.addEventListener('click', e => { if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) closeMenu(); });
+
+/* ─── SCROLL REVEAL ─── */
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-up').forEach(el => revealObs.observe(el));
+
+/* ─── FILTERING ─── */
+(function() {
+  const btns  = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.product-card');
+  const empty = document.getElementById('productEmpty');
+  const countEl = document.getElementById('filterCount');
+
+  function applyFilter(f) {
+    let n = 0;
+    cards.forEach(c => { const ok = f==='all' || c.dataset.category===f; c.classList.toggle('is-hidden',!ok); if(ok) n++; });
+    empty.classList.toggle('is-visible', n===0);
+    if (countEl) countEl.innerHTML = '<strong>'+n+'</strong> '+(n===1?'product':'products');
+  }
+  btns.forEach(btn => btn.addEventListener('click', () => {
+    btns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
+    btn.classList.add('active'); btn.setAttribute('aria-pressed','true');
+    applyFilter(btn.dataset.filter);
+  }));
+  if (countEl) countEl.innerHTML = '<strong>'+cards.length+'</strong> products';
+})();
+
+/* ─── PRODUCT DATA ─── */
+const PRODUCTS = {
+  organizer: {
+    badge:    'Bestseller',
+    category: 'Leather Notebooks',
+    sku:      'REXORA-11653',
+    title:    'Executive Organizer',
+    sub:      'Organizer with Magnetic Pen Holder',
+    tagline:  'Perfect for meetings, planning sessions, travel work setups, and executive gifting. Keeps ideas, tools, and workflow aligned — whether at the desk or on the move.',
+    features: ['Premium leather construction with refined texture','Dedicated compartments for notes, documents, and essentials','Magnetic pen holder for quick access and secure placement','Slim profile that fits easily into bags and briefcases','Durable stitching built for daily professional use','Branding-ready surface for logo embossing'],
+    colors:   [{l:'Brown',c:'#8B4513'},{l:'Black',c:'#222'},{l:'Gray',c:'#7a7065'}],
+    print:    'UV Printing · UV DTF · Screen Printing',
+    img:      'https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FFeatured%20Product.png?alt=media&token=4bcfa093-3ec7-45b9-9727-b279a5dabef4',
+    thumbs:   ['https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FFeatured%20Product.png?alt=media&token=4bcfa093-3ec7-45b9-9727-b279a5dabef4','https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FLEATHER%20COLECTION.png?alt=media&token=35ccf2d5-634b-4430-bef1-dafa8dd75bd3'],
+  },
+  giftset: {
+    badge:    'Gift Set',
+    category: 'Leather Gift Sets',
+    sku:      'Desk to Destinations — 2026',
+    title:    'Leather Gift Set Collection',
+    sub:      'Curated Desk to Destinations Essentials',
+    tagline:  'Designed for professionals who value order, movement, and presence. Each piece transitions seamlessly between work and travel — refined in form, purposeful in function, and consistent in character.',
+    features: ['Curated multi-piece set: organizer, card holder, luggage tag & travel wallet','Consistent Heritage Brown leather finish across all pieces','Unified "Desk to Destinations" 2026 campaign theme','Individual pieces also available separately','Custom logo embossing available across the full set','Premium gift packaging available for bulk corporate orders'],
+    colors:   [{l:'Brown',c:'#8B4513'},{l:'Black',c:'#222'},{l:'Gray',c:'#7a7065'}],
+    print:    'UV Printing · UV DTF · Screen Printing · Laser Engraving',
+    img:      'https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FLEATHER%20COLECTION.png?alt=media&token=35ccf2d5-634b-4430-bef1-dafa8dd75bd3',
+    thumbs:   ['https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FLEATHER%20COLECTION.png?alt=media&token=35ccf2d5-634b-4430-bef1-dafa8dd75bd3','https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FFeatured%20Product.png?alt=media&token=4bcfa093-3ec7-45b9-9727-b279a5dabef4'],
+  },
+  magsafe: {
+    badge:    null,
+    category: 'Tech Accessories',
+    sku:      'Magtec-11659',
+    title:    'MagSafe Card Holder',
+    sub:      'Executive Leather Magnetic Phone Wallet',
+    tagline:  'Ideal for everyday professionals who prefer lightweight carry. Seamlessly transitions from office use to travel without the need for a full wallet.',
+    features: ['MagSafe-compatible design for secure phone attachment','Slim leather profile with minimal bulk','Holds essential cards while maintaining a clean form','Strong magnetic alignment for quick snap-on ease','Premium leather finish that ages naturally over time','Branding-ready surface for corporate logo'],
+    colors:   [{l:'Brown',c:'#8B4513'},{l:'Black',c:'#222'},{l:'Gray',c:'#7a7065'}],
+    print:    'UV Printing · UV DTF · Screen Printing',
+    img:      'https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FCard%20Wallet.png?alt=media&token=2966d450-9969-4909-83bb-ea8e30cda3bf',
+    thumbs:   ['https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FCard%20Wallet.png?alt=media&token=2966d450-9969-4909-83bb-ea8e30cda3bf'],
+  },
+  luggagetag: {
+    badge:    'Customisable',
+    category: 'Luggage & Travel',
+    sku:      'Letheg-11658',
+    title:    'Leather Luggage Tag',
+    sub:      'The Identifier — Ready for Travel',
+    tagline:  'Ideal for business travel, corporate gifting, and brand identity. Adds a refined, professional presence while ensuring easy luggage recognition.',
+    features: ['Premium leather body with clean finishing','Secure attachment strap designed for travel durability','Concealed identification area for privacy','Lightweight construction without compromising strength','Timeless design suitable for all luggage styles','UV printing / Screen printing for branding'],
+    colors:   [{l:'Brown',c:'#8B4513'},{l:'Black',c:'#222'},{l:'Gray',c:'#7a7065'}],
+    print:    'UV Printing · UV DTF · Screen Printing',
+    img:      'https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FLuggage%20tag.png?alt=media&token=de6e9e98-cdbd-4fea-aab4-70869e7e417c',
+    thumbs:   ['https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FLuggage%20tag.png?alt=media&token=de6e9e98-cdbd-4fea-aab4-70869e7e417c'],
+  },
+  travelwallet: {
+    badge:    'New',
+    category: 'Luggage & Travel',
+    sku:      'Leport-11662',
+    title:    'Premium Travel Wallet',
+    sub:      'The Explorer — Multifunctional Passport Holder',
+    tagline:  'Designed for frequent travelers, executives, and corporate gifting. Keeps travel essentials organized and accessible from check-in to destination.',
+    features: ['Structured leather design for passports, cards, and documents','Integrated pen holder for quick access during travel','Multiple inner slots to organize travel essentials','Secure folding structure for protection and ease of use','Compact form designed for business and leisure travel','Branding-ready surface for corporate identity'],
+    colors:   [{l:'Brown',c:'#8B4513'},{l:'Black',c:'#222'},{l:'Gray',c:'#7a7065'}],
+    print:    'UV Printing · UV DTF · Screen Printing',
+    img:      'https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FPOWER%20BANKS.png?alt=media&token=c74e1d30-a64c-4d87-9139-2c879729d3ae',
+    thumbs:   ['https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FPOWER%20BANKS.png?alt=media&token=c74e1d30-a64c-4d87-9139-2c879729d3ae','https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FLuggage%20tag.png?alt=media&token=de6e9e98-cdbd-4fea-aab4-70869e7e417c'],
+  },
+  magfoldra: {
+    badge:    'Tech',
+    category: 'Power Banks',
+    sku:      'MagFoldra-11655',
+    title:    'MagFoldra Power Bank',
+    sub:      'MagSafe Foldable Power Bank Wallet — 5000mAh',
+    tagline:  'Ultra-slim MagSafe foldable power bank wallet with 5000mAh capacity, fast 15W wireless charging, and built-in card holder. Functions as a power bank, wireless charger, and card holder — ideal for corporate gifting and daily travel use.',
+    features: ['5000mAh capacity — reliable all-day mobile power','15W MagSafe-compatible wireless charging output','Foldable design doubles as a phone stand (DeskReady)','Built-in card holder slot for slim everyday carry','Functions: Power Bank + Wireless Charger + Card Holder','Premium PU leather finish — branding-ready'],
+    colors:   [{l:'Gray',c:'#7a7065'},{l:'Navy',c:'#2c3e6b'},{l:'Green',c:'#2e5c3e'}],
+    print:    'UV Printing · UV DTF · Screen Printing',
+    img:      'https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FPower%20Bank.png?alt=media&token=0547b68a-71a0-4b08-a972-5f3c47ecc9b5',
+    thumbs:   ['https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FPower%20Bank.png?alt=media&token=0547b68a-71a0-4b08-a972-5f3c47ecc9b5','https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2FOTHER%20ACCESORIES.png?alt=media&token=1e40417e-b2dc-485e-a9d6-a12635abb53f'],
+  },
+};
+
+/* ─── MODAL ─── */
+const overlay   = document.getElementById('modalOverlay');
+const modalBox  = document.getElementById('modalBox');
+const bodyEl    = document.getElementById('modalBody');
+const thumbsEl  = document.getElementById('modalThumbs');
+const closeBtn  = document.getElementById('modalCloseBtn');
+
+function openModal(key) {
+  const p = PRODUCTS[key]; if (!p) return;
+  const feats = p.features.map(f=>`<li>${f}</li>`).join('');
+  const swatches = p.colors.map(c=>`<div class="modal-swatch"><span class="sw" style="background:${c.c}"></span>${c.l}</div>`).join('');
+  bodyEl.innerHTML = `
+    <div class="modal-img-col">
+      ${p.badge?`<span class="modal-img-badge">${p.badge}</span>`:''}
+      <img id="modalMainImg" src="${p.img}" alt="${p.title}">
+    </div>
+    <div class="modal-info-col">
+      <span class="modal-eyebrow">${p.category}</span>
+      <h2 class="modal-title" id="modalTitle">${p.title}</h2>
+      <span class="modal-sku">${p.sku} &nbsp;·&nbsp; ${p.sub}</span>
+      <p class="modal-tagline">${p.tagline}</p>
+      <span class="modal-label">Key Features</span>
+      <ul class="modal-features">${feats}</ul>
+      <div class="modal-divider"></div>
+      <span class="modal-label">Available Colours</span>
+      <div class="modal-colors-row">${swatches}</div>
+      <p class="modal-print"><b>Printing Method —</b> ${p.print}</p>
+      <div class="modal-actions">
+        <a href="/contact" class="modal-btn-primary">Enquire Now</a>
+        <button class="modal-btn-outline" onclick="alert('Catalogue PDF coming soon.')">Download Catalogue</button>
+      </div>
+    </div>`;
+  if (p.thumbs && p.thumbs.length > 1) {
+    thumbsEl.style.display = 'flex';
+    thumbsEl.innerHTML = p.thumbs.map((src,i)=>
+      `<div class="modal-thumb${i===0?' active':''}" data-src="${src}"><img src="${src}" alt="view ${i+1}" loading="lazy"></div>`
+    ).join('');
+    thumbsEl.querySelectorAll('.modal-thumb').forEach(t => t.addEventListener('click', () => {
+      thumbsEl.querySelectorAll('.modal-thumb').forEach(x=>x.classList.remove('active'));
+      t.classList.add('active');
+      document.getElementById('modalMainImg').src = t.dataset.src;
+    }));
+  } else {
+    thumbsEl.style.display = 'none'; thumbsEl.innerHTML = '';
+  }
+  overlay.classList.add('is-open');
+  document.body.classList.add('modal-open');
+  modalBox.scrollTop = 0;
+  closeBtn.focus();
+}
+
+function closeModal() {
+  overlay.classList.remove('is-open');
+  document.body.classList.remove('modal-open');
+}
+
+closeBtn.addEventListener('click', closeModal);
+overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// Click anywhere on card also opens modal
+document.querySelectorAll('.product-card').forEach(card => {
+  card.addEventListener('click', e => {
+    if (e.target.closest('.enquire-btn')) return;
+    const k = card.dataset.product; if (k) openModal(k);
+  });
+});
 </script>
+
 <script>
-  (function() {
-    const dot = document.getElementById('cursorDot');
-    const ring = document.getElementById('cursorRing');
-    const glow = document.getElementById('cursorGlow');
-    let mx = window.innerWidth/2, my = window.innerHeight/2, rx = mx, ry = my, gx = mx, gy = my;
-    function loop() { rx += (mx-rx)*0.18; ry += (my-ry)*0.18; gx += (mx-gx)*0.10; gy += (my-gy)*0.10; dot.style.left=mx+'px'; dot.style.top=my+'px'; ring.style.left=rx+'px'; ring.style.top=ry+'px'; glow.style.left=gx+'px'; glow.style.top=gy+'px'; requestAnimationFrame(loop); }
-    loop();
-    document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
-    const sel = 'a, button, [onclick], input, select, .product-card, .filter-btn, .social-icon, .footer-col li';
-    document.querySelectorAll(sel).forEach(el => { el.addEventListener('mouseenter', () => { dot.classList.add('hovered'); ring.classList.add('hovered'); glow.classList.add('hovered'); }); el.addEventListener('mouseleave', () => { dot.classList.remove('hovered'); ring.classList.remove('hovered'); glow.classList.remove('hovered'); }); });
-    document.addEventListener('mousedown', () => { ring.classList.add('clicking'); dot.classList.add('clicking'); });
-    document.addEventListener('mouseup', () => { ring.classList.remove('clicking'); dot.classList.remove('clicking'); });
-    document.addEventListener('mouseleave', () => { [dot,ring,glow].forEach(e => e.style.opacity='0'); });
-    document.addEventListener('mouseenter', () => { dot.style.opacity='1'; ring.style.opacity='1'; glow.style.opacity='0.7'; });
-  })();
+/* ─── CUSTOM CURSOR ─── */
+(function(){
+  const dot=document.getElementById('cursorDot'), ring=document.getElementById('cursorRing'), glow=document.getElementById('cursorGlow');
+  let mx=innerWidth/2, my=innerHeight/2, rx=mx, ry=my, gx=mx, gy=my;
+  (function loop(){ rx+=(mx-rx)*0.18; ry+=(my-ry)*0.18; gx+=(mx-gx)*0.10; gy+=(my-gy)*0.10; dot.style.left=mx+'px'; dot.style.top=my+'px'; ring.style.left=rx+'px'; ring.style.top=ry+'px'; glow.style.left=gx+'px'; glow.style.top=gy+'px'; requestAnimationFrame(loop); })();
+  document.addEventListener('mousemove', e=>{mx=e.clientX;my=e.clientY;});
+  const addHover = el => {
+    el.addEventListener('mouseenter',()=>{dot.classList.add('hovered');ring.classList.add('hovered');glow.classList.add('hovered');});
+    el.addEventListener('mouseleave',()=>{dot.classList.remove('hovered');ring.classList.remove('hovered');glow.classList.remove('hovered');});
+  };
+  document.querySelectorAll('a,button,[onclick],.product-card,.filter-btn,.social-icon,.footer-col li,.modal-thumb').forEach(addHover);
+  document.addEventListener('mousedown',()=>{ring.classList.add('clicking');dot.classList.add('clicking');});
+  document.addEventListener('mouseup',()=>{ring.classList.remove('clicking');dot.classList.remove('clicking');});
+  document.addEventListener('mouseleave',()=>{[dot,ring,glow].forEach(e=>e.style.opacity='0');});
+  document.addEventListener('mouseenter',()=>{dot.style.opacity='1';ring.style.opacity='1';glow.style.opacity='0.7';});
+})();
 </script>
 </body>
 </html>
