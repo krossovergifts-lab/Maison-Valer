@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Product surface (notebook cover) -->
+  <rect x="10" y="12" width="38" height="40" rx="3" stroke="#e8903a" stroke-width="1.8" fill="none"/>
+  <!-- Embossing area / branding zone -->
+  <rect x="18" y="22" width="22" height="20" rx="2" stroke="#e8903a" stroke-width="1.2" stroke-dasharray="3 2" fill="none"/>
+  <!-- YOUR LOGO text inside -->
+  <text x="29" y="31" font-family="Georgia, serif" font-size="5.5" fill="#e8903a" text-anchor="middle" letter-spacing="0.5">YOUR</text>
+  <text x="29" y="38" font-family="Georgia, serif" font-size="5.5" fill="#e8903a" text-anchor="middle" letter-spacing="0.5">LOGO</text>
+  <!-- Stamp / emboss tool -->
+  <rect x="46" y="8" width="8" height="14" rx="2" stroke="#c1440e" stroke-width="1.4" fill="none"/>
+  <line x1="50" y1="22" x2="50" y2="28" stroke="#c1440e" stroke-width="1.4" stroke-linecap="round"/>
+  <circle cx="50" cy="30" r="2" fill="#c1440e"/>
+</svg>
