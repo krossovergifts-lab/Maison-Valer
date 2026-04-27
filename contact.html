@@ -138,7 +138,7 @@
 
 <nav>
   <a href="/" class="nav-logo">
-    <img src="https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2Fmaison%20valer.svg?alt=media&token=56dd5471-f149-43c2-ab6a-345004a6deab" alt="Maison Valér">
+    <img src="images/logo.svg" alt="Maison Valér">
   </a>
   <ul class="nav-links">
     <li><a href="/">Home</a></li>
@@ -209,7 +209,6 @@
       </div>
       <div class="info-panel fade-up">
         <div class="info-card"><div class="info-card-icon">&#9993;</div><h4>Email</h4><p><a href="mailto:hello@maisonvaler.com">hello@maisonvaler.com</a></p><p><a href="mailto:corporate@maisonvaler.com">corporate@maisonvaler.com</a></p></div>
-        <div class="info-card"><div class="info-card-icon">&#128241;</div><h4>WhatsApp &amp; Phone</h4><p><a href="tel:+971500000000">+971 50 000 0000</a></p><p style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:6px;">Available Sun&#8211;Thu, 9am&#8211;6pm GST</p></div>
         <div class="info-card"><div class="info-card-icon">&#128336;</div><h4>Business Hours</h4>
           <div class="hours-row"><span>Sunday &#8211; Thursday</span><span>9:00 AM &#8211; 6:00 PM</span></div>
           <div class="hours-row"><span>Friday</span><span>9:00 AM &#8211; 1:00 PM</span></div>
@@ -243,7 +242,7 @@
   <div class="footer-watermark">MV</div>
   <div class="footer-grid">
     <div class="footer-brand">
-      <img src="https://firebasestorage.googleapis.com/v0/b/merchanndise-8428f.appspot.com/o/Maison%20Valer%2Fmaison%20valer.svg?alt=media&token=56dd5471-f149-43c2-ab6a-345004a6deab" alt="Maison Valér">
+      <img src="images/logo.svg" alt="Maison Valér">
       <div class="footer-logo-sub">Style with Purpose</div>
       <p>Refined essentials for modern work and travel. Premium leather and lifestyle pieces crafted for professionals who value restraint, quality, and detail.</p>
       <div class="social-icons">
@@ -281,9 +280,21 @@
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   document.getElementById('submitBtn').addEventListener('click', function() {
     var fname = document.getElementById('fname').value.trim();
+    var lname = document.getElementById('lname').value.trim();
     var email = document.getElementById('email').value.trim();
+    var company = document.getElementById('company').value.trim();
+    var enquiry = document.getElementById('enquiry').value;
     var message = document.getElementById('message').value.trim();
     if (!fname || !email || !message) { alert('Please fill in your name, email, and message.'); return; }
+    var subject = encodeURIComponent('Enquiry: ' + (enquiry || 'General') + ' — Maison Valer');
+    var body = encodeURIComponent(
+      'Name: ' + fname + ' ' + lname + '\n' +
+      'Email: ' + email + '\n' +
+      'Company: ' + (company || '—') + '\n' +
+      'Enquiry Type: ' + (enquiry || '—') + '\n\n' +
+      'Message:\n' + message
+    );
+    window.location.href = 'mailto:hello@maisonvaler.com?subject=' + subject + '&body=' + body;
     document.getElementById('contactForm').style.display = 'none';
     document.getElementById('formSuccess').style.display = 'block';
   });
