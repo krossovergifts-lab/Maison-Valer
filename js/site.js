@@ -147,7 +147,12 @@
   }
 
   /* ---------- Product gallery: colour-swap + hover image + thumbnails ---------- */
-  function imgSrc(name) { return 'images/products/' + name + '.webp'; }
+  function imgSrc(name) {
+    // paths are pre-resolved by the generator (full URL or local path);
+    // tolerate a bare name too, just in case.
+    if (/^https?:\/\//.test(name) || name.indexOf('/') > -1 || name.indexOf('.webp') > -1) return name;
+    return 'images/products/' + name + '.webp';
+  }
 
   function setupCard(card) {
     var jsonEl = card.querySelector('.pcard-json');

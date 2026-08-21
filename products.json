@@ -1,0 +1,418 @@
+{
+ "categories": [
+  {
+   "value": "desk",
+   "title": {
+    "en": "Desk",
+    "ru": "Письменный стол",
+    "ar": "مكتب"
+   },
+   "order": 10
+  },
+  {
+   "value": "travel",
+   "title": {
+    "en": "Travel",
+    "ru": "Путешествия",
+    "ar": "السياحة"
+   },
+   "order": 20
+  },
+  {
+   "value": "everyday",
+   "title": {
+    "en": "Everyday",
+    "ru": "Ежедневно",
+    "ar": "يوميًا"
+   },
+   "order": 30
+  },
+  {
+   "value": "gifting",
+   "title": {
+    "en": "Gifting",
+    "ru": "Подарок",
+    "ar": "الهدايا"
+   },
+   "order": 40
+  }
+ ],
+ "products": [
+  {
+   "sku": "REXORA-11653",
+   "order": 10,
+   "sections": [
+    "collection",
+    "desk",
+    "featured"
+   ],
+   "cats": [
+    "desk",
+    "gifting"
+   ],
+   "name": {
+    "en": "Executive Organizer",
+    "ru": "Исполнительный организатор",
+    "ar": "منظم تنفيذي"
+   },
+   "sub": {
+    "en": "with Magnetic Pen Holder",
+    "ru": "с магнитным держателем ручки",
+    "ar": "مع حامل قلم مغناطيسي"
+   },
+   "desc": {
+    "en": "Notes, documents and a magnetic pen — held in one refined leather profile built for meetings and the move.",
+    "ru": "Заметки, документы и магнитная ручка — хранятся в одном изысканном кожаном профиле, построенном для встреч и переезда.",
+    "ar": "ملاحظات ووثائق وقلم مغناطيسي — يتم الاحتفاظ به في ملف تعريف واحد مصنوع من الجلد المصقول مصمم للاجتماعات والتنقل."
+   },
+   "archetype": {
+    "en": "The Strategist",
+    "ru": "Стратег",
+    "ar": "الخبير الاستراتيجي"
+   },
+   "badge": {
+    "en": "New Arrival",
+    "ru": "Новая коллекция",
+    "ar": "مجموعة جديدة"
+   },
+   "colors": [
+    {
+     "colorKey": "brown",
+     "imgs": []
+    },
+    {
+     "colorKey": "black",
+     "imgs": []
+    },
+    {
+     "colorKey": "gray",
+     "imgs": []
+    }
+   ],
+   "d2dRole": {
+    "en": "Organizer with Magnetic Pen Holder",
+    "ru": "Органайзер с магнитным держателем ручки",
+    "ar": "منظم مع حامل قلم مغناطيسي"
+   },
+   "d2dBestFor": {
+    "en": "Meetings · Travel work",
+    "ru": "Совещания · Туристическая работа",
+    "ar": "الاجتماعات · أعمال السفر"
+   },
+   "d2dCarries": {
+    "en": "Notes · Pen · Documents",
+    "ru": "Примечания · Ручка · Документы",
+    "ar": "ملاحظات · قلم · مستندات"
+   }
+  },
+  {
+   "sku": "MAGTEC-11659",
+   "order": 20,
+   "sections": [
+    "collection",
+    "desk",
+    "featured"
+   ],
+   "cats": [
+    "travel",
+    "everyday"
+   ],
+   "name": {
+    "en": "Magnetic Card Holder",
+    "ru": "Держатель магнитной карты",
+    "ar": "حامل بطاقة ممغنط"
+   },
+   "sub": {
+    "en": "MagSafe Phone Wallet",
+    "ru": "Телефонный кошелек MagSafe",
+    "ar": "محفظة هاتف MagSafe"
+   },
+   "desc": {
+    "en": "Everyday cards in a slim MagSafe form that snaps to the phone and disappears into the pocket.",
+    "ru": "Ежедневные открытки в тонкой форме MagSafe, которая прилипает к телефону и исчезает в кармане.",
+    "ar": "بطاقات يومية في شكل MagSafe رفيع يستقر على الهاتف ويختفي في الجيب."
+   },
+   "archetype": {
+    "en": "The Minimalist",
+    "ru": "Минималист",
+    "ar": "الحد الأدنى"
+   },
+   "badge": {
+    "en": "New Arrival",
+    "ru": "Новая коллекция",
+    "ar": "مجموعة جديدة"
+   },
+   "colors": [
+    {
+     "colorKey": "brown",
+     "imgs": []
+    },
+    {
+     "colorKey": "black",
+     "imgs": []
+    },
+    {
+     "colorKey": "gray",
+     "imgs": []
+    }
+   ],
+   "d2dRole": {
+    "en": "MagSafe Card Holder",
+    "ru": "Держатель карты MagSafe",
+    "ar": "حامل بطاقة MagSafe"
+   },
+   "d2dBestFor": {
+    "en": "Everyday · Commute",
+    "ru": "Ежедневно · Поездки на работу и обратно",
+    "ar": "كل يوم · التنقُّل"
+   },
+   "d2dCarries": {
+    "en": "Cards · MagSafe",
+    "ru": "Карты · MagSafe",
+    "ar": "بطاقات · MagSafe"
+   }
+  },
+  {
+   "sku": "LEPORT-11662",
+   "order": 30,
+   "sections": [
+    "collection",
+    "desk",
+    "featured"
+   ],
+   "cats": [
+    "travel",
+    "gifting"
+   ],
+   "name": {
+    "en": "Premium Travel Wallet",
+    "ru": "Премиум-кошелек для путешествий",
+    "ar": "محفظة سفر مميزة"
+   },
+   "sub": {
+    "en": "Multifunctional Passport Holder",
+    "ru": "Многофункциональный держатель паспорта",
+    "ar": "حامل جواز سفر متعدد الوظائف"
+   },
+   "desc": {
+    "en": "Passport, cards and boarding pass in a structured fold — organised from check-in to destination.",
+    "ru": "Паспорт, карты и посадочный талон в структурированном виде — от регистрации до пункта назначения.",
+    "ar": "جواز السفر والبطاقات وبطاقة الصعود إلى الطائرة في طية منظمة — منظمة من تسجيل الوصول إلى الوجهة."
+   },
+   "archetype": {
+    "en": "The Explorer",
+    "ru": "L'Explorer",
+    "ar": "دورا ذا اكسبلورر"
+   },
+   "badge": {
+    "en": "New Arrival",
+    "ru": "Новая коллекция",
+    "ar": "مجموعة جديدة"
+   },
+   "colors": [
+    {
+     "colorKey": "brown",
+     "imgs": [
+      "https://cdn.sanity.io/images/epxj3lh6/production/4eb84a3100985a0b099b4d6488d411be541a3d0e-3000x3000.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/717a0d3251d43397478e16ace83fc52afcc5f420-3000x3000.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/45c1951110662a698aa0577d1e34a755eb0e4874-3000x3000.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/f7cf609b249e1ed5d68b4e23a9fb76d0c8a77876-3000x3000.webp?w=1200&h=1200&fit=crop&auto=format"
+     ]
+    },
+    {
+     "colorKey": "black",
+     "imgs": [
+      "https://cdn.sanity.io/images/epxj3lh6/production/6d92619c6bc21159d58e1478de281a2483f628ab-3000x3000.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/4d7baea6fbc8c70b142724f7ef49dc48ed1d1faf-3000x3000.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/aad7fc58393f3267b0d4ca81f3c8b4340aa49a47-3000x3000.webp?w=1200&h=1200&fit=crop&auto=format"
+     ]
+    },
+    {
+     "colorKey": "gray",
+     "imgs": [
+      "https://cdn.sanity.io/images/epxj3lh6/production/d8cf014b681cf8e36f5bdc715afc279242206aff-3000x3000.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/4cbfc46a1102215288ad0eb89feb1b3a5355d629-3000x3000.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/67911adf82953752162a262aed7c4efed1afc959-3000x3000.webp?w=1200&h=1200&fit=crop&auto=format"
+     ]
+    }
+   ],
+   "d2dRole": {
+    "en": "Multifunctional Passport Holder",
+    "ru": "Многофункциональный держатель паспорта",
+    "ar": "حامل جواز سفر متعدد الوظائف"
+   },
+   "d2dBestFor": {
+    "en": "Travel · Business",
+    "ru": "путешествий (бизнес",
+    "ar": "السفر · الأعمال"
+   },
+   "d2dCarries": {
+    "en": "Passport · Cards · Pass",
+    "ru": "Паспорт · Карты · Пропуск",
+    "ar": "جواز السفر · البطاقات · جواز السفر"
+   }
+  },
+  {
+   "sku": "LETHEG-11658",
+   "order": 40,
+   "sections": [
+    "collection",
+    "desk"
+   ],
+   "cats": [
+    "travel",
+    "gifting"
+   ],
+   "name": {
+    "en": "Leather Luggage Tag",
+    "ru": "Кожаная багажная бирка",
+    "ar": "بطاقة الأمتعة الجلدية"
+   },
+   "sub": {
+    "en": "Concealed ID",
+    "ru": "Скрытое удостоверение личности",
+    "ar": "بطاقة هوية مخفية"
+   },
+   "desc": {
+    "en": "A quiet mark of ownership — refined presence on the belt, privacy for the details within.",
+    "ru": "Тихий знак владения — изысканное присутствие на поясе, конфиденциальность для деталей внутри.",
+    "ar": "علامة هادئة للملكية — وجود محسّن على الحزام، وخصوصية للتفاصيل في الداخل."
+   },
+   "archetype": {
+    "en": "The Identifier",
+    "ru": "Идентификатор",
+    "ar": "المعرف"
+   },
+   "badge": {
+    "en": "New Arrival",
+    "ru": "Новая коллекция",
+    "ar": "مجموعة جديدة"
+   },
+   "colors": [
+    {
+     "colorKey": "brown",
+     "imgs": []
+    },
+    {
+     "colorKey": "black",
+     "imgs": []
+    },
+    {
+     "colorKey": "gray",
+     "imgs": []
+    }
+   ],
+   "d2dRole": {
+    "en": "Leather Luggage Tag",
+    "ru": "Кожаная багажная бирка",
+    "ar": "بطاقة الأمتعة الجلدية"
+   },
+   "d2dBestFor": {
+    "en": "Travel · Gifting",
+    "ru": "Путешествия · Подарки",
+    "ar": "السفر · الإهداء"
+   },
+   "d2dCarries": {
+    "en": "Concealed ID",
+    "ru": "Скрытое удостоверение личности",
+    "ar": "بطاقة هوية مخفية"
+   }
+  },
+  {
+   "sku": "MAGFOLD-11656",
+   "order": 50,
+   "sections": [
+    "collection"
+   ],
+   "cats": [
+    "everyday",
+    "desk"
+   ],
+   "name": {
+    "en": "Magnetic Card Holder & Stand",
+    "ru": "Держатель и подставка для магнитных карт",
+    "ar": "حامل وحامل ممغنط للبطاقات"
+   },
+   "sub": {
+    "en": "Fold-out MagSafe Stand",
+    "ru": "Раскладная подставка MagSafe",
+    "ar": "حامل MagSafe قابل للطي"
+   },
+   "desc": {
+    "en": "Cards that hold, then fold — a magnetic stand for the desk, the flight, the in-between.",
+    "ru": "Карты, которые держат, а затем складывают — магнитная подставка для стола, полета, между ними.",
+    "ar": "البطاقات التي تحمل، ثم تطوي — حامل مغناطيسي للمكتب، والرحلة، وما بينهما."
+   },
+   "archetype": {
+    "en": "The Companion",
+    "ru": "Компаньон",
+    "ar": "الرفيق"
+   },
+   "badge": {
+    "en": "New Arrival",
+    "ru": "Новая коллекция",
+    "ar": "مجموعة جديدة"
+   },
+   "colors": [
+    {
+     "colorKey": "gray",
+     "imgs": []
+    },
+    {
+     "colorKey": "blue",
+     "imgs": []
+    },
+    {
+     "colorKey": "green",
+     "imgs": []
+    }
+   ]
+  },
+  {
+   "sku": "MAGFOLDRA-11655",
+   "order": 60,
+   "sections": [
+    "collection"
+   ],
+   "cats": [
+    "everyday",
+    "desk"
+   ],
+   "name": {
+    "en": "Magnetic Power Bank & Stand",
+    "ru": "Магнитный блок питания и подставка",
+    "ar": "باور بانك مغناطيسي وحامل"
+   },
+   "sub": {
+    "en": "Wireless MagSafe Power",
+    "ru": "Беспроводной MagSafe Power",
+    "ar": "طاقة MagSafe اللاسلكية"
+   },
+   "desc": {
+    "en": "Wireless power with a fold-out stand — a quiet reserve of energy that stays with the phone.",
+    "ru": "Беспроводное питание с раскладной подставкой — тихий запас энергии, который остается с телефоном.",
+    "ar": "طاقة لاسلكية مع حامل قابل للطي — احتياطي هادئ من الطاقة يبقى مع الهاتف."
+   },
+   "archetype": {
+    "en": "The Reserve",
+    "ru": "заповедника",
+    "ar": "The Reserve"
+   },
+   "badge": {
+    "en": "New Arrival",
+    "ru": "Новая коллекция",
+    "ar": "مجموعة جديدة"
+   },
+   "colors": [
+    {
+     "colorKey": "blue",
+     "imgs": []
+    },
+    {
+     "colorKey": "gray",
+     "imgs": []
+    }
+   ]
+  }
+ ]
+}

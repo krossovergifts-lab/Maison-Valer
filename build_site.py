@@ -2,7 +2,7 @@
 """Assemble Maison Valér static site — i18n (EN/RU/AR + RTL), gallery cards, no prices."""
 import os, json
 
-OUT = "site"
+OUT = os.environ.get("MV_OUT", ".")   # writes HTML + js/i18n.js here (your repo root)
 LANGS = ["en", "ru", "ar"]
 
 # =====================================================================
@@ -413,6 +413,90 @@ PRODUCTS = [
               ("gray", ["powerbank-gray-1","powerbank-gray-2","powerbank-gray-3"])]),
 ]
 
+# =====================================================================
+# Data source: if products.json exists (produced by sanity_sync.py),
+# replace the built-in demo data with the live backend catalogue.
+# =====================================================================
+CATEGORIES = None          # [{"value","title":{en,ru,ar},"order"}]
+D2D_ARCHS  = None          # built from products tagged 'desk'
+
+def _tri(v):
+    """Normalise a field to {en,ru,ar}; accept a plain string too."""
+    if isinstance(v, dict):
+        en = v.get("en", "") or ""
+        return {"en": en, "ru": v.get("ru") or en, "ar": v.get("ar") or en}
+    v = v or ""
+    return {"en": v, "ru": v, "ar": v}
+
+def load_from_sanity(path="products.json"):
+    global PRODUCTS, CATEGORIES, D2D_ARCHS
+    if not os.path.exists(path):
+        return False
+    data = json.load(open(path, encoding="utf-8"))
+    cats = data.get("categories", [])
+    prods = data.get("products", [])
+    if not prods:
+        return False
+
+    CATEGORIES = [{"value": c["value"], "title": _tri(c.get("title")), "order": c.get("order", 100)}
+                  for c in cats if c.get("value")]
+    # dynamic filter labels
+    for c in CATEGORIES:
+        TR["filter_" + c["value"]] = c["title"]
+
+    new_products = []
+    d2d = []
+    for i, p in enumerate(prods):
+        key = f"p{i+1}"
+        name, sub, desc = _tri(p.get("name")), _tri(p.get("sub")), _tri(p.get("desc"))
+        arch, badge = _tri(p.get("arch")), _tri(p.get("badge"))
+        TR[f"{key}_name"], TR[f"{key}_sub"], TR[f"{key}_desc"] = name, sub, desc
+        TR[f"arch_{key}"] = arch
+        has_badge = bool((p.get("badge") or {}).get("en") if isinstance(p.get("badge"), dict) else p.get("badge"))
+        if has_badge:
+            TR[f"{key}_badge"] = badge
+
+        # colours: real image URLs, else a neutral placeholder for that colour
+        colors = []
+        for cw in p.get("colors", []):
+            ck = cw.get("colorKey")
+            if not ck:
+                continue
+            imgs = [u for u in (cw.get("imgs") or []) if u]
+            if not imgs:
+                imgs = [f"_ph-{ck}"]        # local placeholder tile
+            colors.append((ck, imgs))
+        if not colors:
+            continue
+
+        cats_list = [c for c in (p.get("cats") or []) if c]
+        entry = dict(key=key, sku=p.get("sku", ""), arch=key,
+                     cat=" ".join(cats_list), badge=has_badge, colors=colors,
+                     sections=p.get("sections") or ["collection"])
+        new_products.append(entry)
+
+        # Desk-to-Destinations row data
+        if "desk" in (p.get("sections") or []):
+            n = f"{len(d2d)+1:02d}"
+            TR[f"{key}_role"]  = _tri(p.get("d2dRole") or p.get("sub"))
+            TR[f"{key}_best"]  = _tri(p.get("d2dBestFor"))
+            TR[f"{key}_carry"] = _tri(p.get("d2dCarries"))
+            d2d_img = p.get("d2dImg") or (colors[0][1][0])
+            d2d.append(dict(n=n, arch=key, sku=p.get("sku", ""), img=d2d_img,
+                            role=f"{key}_role", best=f"{key}_best", carry=f"{key}_carry",
+                            cols=[c for c, _ in colors]))
+
+    PRODUCTS = new_products
+    D2D_ARCHS = d2d
+    print(f"[sanity] loaded {len(PRODUCTS)} products, {len(CATEGORIES)} categories, {len(d2d)} d2d rows")
+    return True
+
+USING_SANITY = load_from_sanity()
+
+def img_src(name):
+    """Full URL as-is, otherwise a local product image."""
+    return name if str(name).startswith("http") else f"images/products/{name}.webp"
+
 def swatch_buttons(p):
     s = ""
     for i, (c, _imgs) in enumerate(p["colors"]):
@@ -422,16 +506,23 @@ def swatch_buttons(p):
     return f'<div class="swatches" role="group" aria-label="Colour">{s}</div>'
 
 def product_card(p, delay=""):
-    colors_json = [{"k": c, "name": EN("c_"+c), "imgs": imgs} for c, imgs in p["colors"]]
+    colors_json = [{"k": c, "name": EN("c_"+c), "imgs": [img_src(x) for x in imgs]} for c, imgs in p["colors"]]
     data = json.dumps({"colors": colors_json}, ensure_ascii=False).replace("</", "<\\/")
-    first = p["colors"][0][1][0]
+    first = img_src(p["colors"][0][1][0])
     namekey = p["key"] + "_name"; subkey = p["key"] + "_sub"; desckey = p["key"] + "_desc"
+    # badge: dynamic per-product when using Sanity, else the default "New Arrival"
+    if p.get("badge") and (p["key"] + "_badge") in TR:
+        tag = f'<span class="pcard-tag" {A(p["key"]+"_badge")}>{EN(p["key"]+"_badge")}</span>'
+    elif not USING_SANITY:
+        tag = f'<span class="pcard-tag" {A("badge_new")}>{EN("badge_new")}</span>'
+    else:
+        tag = ""
     return f'''
       <article class="pcard reveal {delay}" data-cat="{p['cat']}">
         <div class="pcard-media">
-          <span class="pcard-tag" {A("badge_new")}>{EN("badge_new")}</span>
+          {tag}
           <span class="pcard-arch" {A("arch_"+p['arch'])}>{EN("arch_"+p['arch'])}</span>
-          <img class="pcard-img" src="images/products/{first}.webp" alt="{EN(namekey)}" loading="lazy" width="1200" height="1200">
+          <img class="pcard-img" src="{first}" alt="{EN(namekey)}" loading="lazy" width="1200" height="1200">
           <div class="pcard-thumbs" aria-label="Views"></div>
         </div>
         <div class="pcard-body">
@@ -457,7 +548,11 @@ def feature_strip():
 # PAGE: HOME
 # =====================================================================
 def page_home():
-    cards = "".join(product_card(p, ["","d1","d2","d3"][i]) for i, p in enumerate(PRODUCTS[:3]))
+    feat = [p for p in PRODUCTS if "featured" in p.get("sections", [])] if USING_SANITY else PRODUCTS
+    if not feat:
+        feat = PRODUCTS
+    feat = feat[:3]
+    cards = "".join(product_card(p, ["","d1","d2","d3"][i]) for i, p in enumerate(feat))
     return head("Maison Valér — Style, Refined.",
                 "Maison Valér crafts premium leather essentials for work, travel and executive gifting. The language of considered design.",
                 "home") + header("home") + f'''
@@ -560,10 +655,15 @@ def page_home():
 # PAGE: COLLECTION
 # =====================================================================
 def page_collection():
-    cards = "".join(product_card(p, ["","d1","d2","","d1","d2"][i]) for i, p in enumerate(PRODUCTS))
+    coll = [p for p in PRODUCTS if "collection" in p.get("sections", [])] if USING_SANITY else PRODUCTS
+    if not coll:
+        coll = PRODUCTS
+    dl = ["","d1","d2"]
+    cards = "".join(product_card(p, dl[i % 3]) for i, p in enumerate(coll))
+    filter_keys = ["all"] + [c["value"] for c in CATEGORIES] if CATEGORIES else ["all","desk","travel","everyday","gifting"]
     filters = "".join(
         f'<button class="chip{" active" if k=="all" else ""}" data-filter="{k}" {A("filter_"+k)}>{EN("filter_"+k)}</button>'
-        for k in ["all","desk","travel","everyday","gifting"])
+        for k in filter_keys)
     return head("Collection — Maison Valér",
                 "The full Maison Valér collection: organizers, card holders, travel wallets, luggage tags and magnetic accessories in premium leather.",
                 "collection") + header("collection") + f'''
@@ -587,29 +687,38 @@ def page_collection():
 # PAGE: DESK TO DESTINATIONS
 # =====================================================================
 def page_d2d():
-    archs = [
-        dict(n="01", arch="strategist", img="life-organizer", sku="REXORA-11653",
-             role="p1_sub", p="a1_p", use="a1_use", carry="a1_carry", cols=["brown","black","gray"]),
-        dict(n="02", arch="minimalist", img="cardholder-gray", sku="MAGTEC-11659",
-             role="a2_role" if "a2_role" in TR else "p2_sub", p="a2_p", use="a2_use", carry="a2_carry", cols=["brown","black","gray"]),
-        dict(n="03", arch="explorer", img="life-passport", sku="LEPORT-11662",
-             role="p3_sub", p="a3_p", use="a3_use", carry="a3_carry", cols=["brown","black","gray"]),
-        dict(n="04", arch="identifier", img="luggage-tag", sku="LETHEG-11658",
-             role="p4_sub", p="a4_p", use="a4_use", carry="a4_carry", cols=["brown","black","gray"]),
-    ]
+    if USING_SANITY and D2D_ARCHS is not None:
+        archs = D2D_ARCHS
+    else:
+        archs = [
+            dict(n="01", arch="strategist", img="life-organizer", sku="REXORA-11653",
+                 role="p1_sub", best="a1_use", carry="a1_carry", cols=["brown","black","gray"], p="a1_p"),
+            dict(n="02", arch="minimalist", img="cardholder-gray", sku="MAGTEC-11659",
+                 role="p2_sub", best="a2_use", carry="a2_carry", cols=["brown","black","gray"], p="a2_p"),
+            dict(n="03", arch="explorer", img="life-passport", sku="LEPORT-11662",
+                 role="p3_sub", best="a3_use", carry="a3_carry", cols=["brown","black","gray"], p="a3_p"),
+            dict(n="04", arch="identifier", img="luggage-tag", sku="LETHEG-11658",
+                 role="p4_sub", best="a4_use", carry="a4_carry", cols=["brown","black","gray"], p="a4_p"),
+        ]
+    def dsrc(im):
+        if str(im).startswith("http"):
+            return im
+        # legacy editorial local images live in images/, product tiles in images/products/
+        return f"images/products/{im}.webp" if str(im).startswith("_ph-") or "-" in str(im) else f"images/{im}.webp"
     blocks = ""
     for a in archs:
         sw = "".join(f'<span class="swatch sw-{c}" title="{EN("c_"+c)}"></span>' for c in a["cols"])
+        body = f'<p {A(a["p"])}>{EN(a["p"])}</p>' if a.get("p") and a["p"] in TR else ''
         blocks += f'''
       <article class="arch reveal">
-        <div class="arch-media"><img src="images/{a['img']}.webp" alt="{EN("arch_"+a['arch'])}" loading="lazy" width="950" height="950"></div>
+        <div class="arch-media"><img src="{dsrc(a['img'])}" alt="{EN("arch_"+a['arch'])}" loading="lazy" width="950" height="950"></div>
         <div>
           <span class="arch-index">{a['n']}</span>
           <h2 {AH("arch_"+a['arch'])}>{EN("arch_"+a['arch'])}</h2>
           <p class="role" {A(a['role'])}>{EN(a['role'])}</p>
-          <p {A(a['p'])}>{EN(a['p'])}</p>
+          {body}
           <div class="arch-meta">
-            <div><span class="k" {A("meta_bestfor")}>{EN("meta_bestfor")}</span><span class="v" {A(a['use'])}>{EN(a['use'])}</span></div>
+            <div><span class="k" {A("meta_bestfor")}>{EN("meta_bestfor")}</span><span class="v" {A(a['best'])}>{EN(a['best'])}</span></div>
             <div><span class="k" {A("meta_carries")}>{EN("meta_carries")}</span><span class="v" {A(a['carry'])}>{EN(a['carry'])}</span></div>
           </div>
           <div style="margin-top:30px;display:flex;gap:14px;align-items:center;flex-wrap:wrap">
