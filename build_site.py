@@ -1,9 +1,32 @@
 # -*- coding: utf-8 -*-
 """Assemble Maison Valér static site — i18n (EN/RU/AR + RTL), gallery cards, no prices."""
-import os, json
+import os, json, urllib.parse
 
 OUT = os.environ.get("MV_OUT", ".")   # writes HTML + js/i18n.js here (your repo root)
 LANGS = ["en", "ru", "ar"]
+
+# ---- Brand / SEO (independent Maison Valér, based in the UAE) ----
+SITE_URL = os.environ.get("MV_SITE_URL", "https://maisonvaler.com").rstrip("/")
+BRAND = "Maison Valér"
+PATHS = {"home": "/", "collection": "/collection", "d2d": "/desk-to-destinations",
+         "about": "/about", "contact": "/contact"}
+
+def _abs(u):
+    u = str(u)
+    return u if u.startswith("http") else f"{SITE_URL}/{u.lstrip('/')}"
+
+def jsonld_site():
+    org = {
+        "@type": "Organization", "name": BRAND, "url": SITE_URL + "/",
+        "logo": SITE_URL + "/images/hero-desk.webp",
+        "email": "hello@maisonvaler.com",
+        "description": "Maison Valér crafts premium leather essentials for work, travel and executive gifting — the language of considered design.",
+        "areaServed": "AE",
+        "address": {"@type": "PostalAddress", "addressLocality": "Dubai", "addressCountry": "AE"},
+    }
+    web = {"@type": "WebSite", "name": BRAND, "url": SITE_URL + "/"}
+    graph = {"@context": "https://schema.org", "@graph": [org, web]}
+    return '<script type="application/ld+json">' + json.dumps(graph, ensure_ascii=False) + '</script>'
 
 # =====================================================================
 # TRANSLATIONS  (key -> {en, ru, ar})
@@ -18,6 +41,8 @@ TR = {
  "cta_enquire":    {"en":"Enquire","ru":"Запрос","ar":"استفسار"},
  "lang_label":     {"en":"Language","ru":"Язык","ar":"اللغة"},
  "quick_look":     {"en":"Quick look","ru":"Быстрый просмотр","ar":"نظرة سريعة"},
+ "cta_quote":      {"en":"Get a Quote","ru":"Запросить предложение","ar":"اطلب عرض سعر"},
+ "quote_prefill":  {"en":"I'd like a quote for ","ru":"Хочу запросить предложение по ","ar":"أرغب في طلب عرض سعر لـ "},
 
  # colours
  "c_brown":{"en":"Brown","ru":"Коричневый","ar":"بنّي"},
@@ -279,6 +304,9 @@ def lang_switch(cls=""):
 # Head / Header / Footer
 # =====================================================================
 def head(title, desc, page):
+    path = PATHS.get(page, "/")
+    canonical = SITE_URL + ("/" if path == "/" else path)
+    share = SITE_URL + "/images/hero-desk.webp"
     return f'''<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -287,12 +315,22 @@ def head(title, desc, page):
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <meta name="theme-color" content="#14100c">
+<link rel="canonical" href="{canonical}">
+<meta property="og:site_name" content="{BRAND}">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{canonical}">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
-<meta property="og:type" content="website">
+<meta property="og:image" content="{share}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{title}">
+<meta name="twitter:description" content="{desc}">
+<meta name="twitter:image" content="{share}">
 <link rel="preload" href="fonts/fraunces-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
+{jsonld_site()}
 <script src="js/i18n.js"></script>
 </head>
 <body>'''
@@ -530,9 +568,26 @@ def product_card(p, delay=""):
           <h3><span {A(namekey)}>{EN(namekey)}</span><br><span class="sub" {A(subkey)}>{EN(subkey)}</span></h3>
           <p {A(desckey)}>{EN(desckey)}</p>
           <div class="pcard-foot">{swatch_buttons(p)}</div>
+          <a class="pcard-cta" href="contact.html?product={urllib.parse.quote(p['sku'])}&amp;name={urllib.parse.quote(EN(namekey))}">
+            <span class="pcard-cta-in"><span {A("cta_quote")}>{EN("cta_quote")}</span> {ARW}</span>
+          </a>
         </div>
         <script type="application/json" class="pcard-json">{data}</script>
       </article>'''
+
+def jsonld_products():
+    items = []
+    for i, p in enumerate(PRODUCTS):
+        nm = EN(p["key"] + "_name")
+        ds = EN(p["key"] + "_desc")
+        first = p["colors"][0][1][0]
+        img = _abs(first if str(first).startswith("http") else f"images/products/{first}.webp")
+        prod = {"@type": "Product", "name": nm, "sku": p.get("sku", ""),
+                "description": ds, "brand": {"@type": "Brand", "name": BRAND},
+                "image": img, "category": (p.get("cat", "") or "").replace(" ", ", ")}
+        items.append({"@type": "ListItem", "position": i + 1, "item": prod})
+    graph = {"@context": "https://schema.org", "@type": "ItemList", "itemListElement": items}
+    return '<script type="application/ld+json">' + json.dumps(graph, ensure_ascii=False) + '</script>'
 
 def feature_strip():
     feats = [(IC_LEATHER,"feat1"),(IC_PEN,"feat2"),(IC_SLIM,"feat3"),(IC_BRAND,"feat4"),(IC_GIFT,"feat5")]
@@ -680,6 +735,7 @@ def page_collection():
     </div>
   </section>
 {feature_strip()}
+{jsonld_products()}
 </main>
 ''' + footer()
 
@@ -894,4 +950,23 @@ print("wrote js/i18n.js with", len(TR), "keys")
 
 with open(os.path.join(OUT, "vercel.json"), "w") as f:
     f.write('{\n  "cleanUrls": true,\n  "trailingSlash": false\n}\n')
+
+# ---- sitemap.xml + robots.txt (for Google indexing) ----
+import datetime
+_today = datetime.date.today().isoformat()
+_urls = [("/", "1.0", "weekly"), ("/collection", "0.9", "weekly"),
+         ("/desk-to-destinations", "0.8", "monthly"), ("/about", "0.6", "monthly"),
+         ("/contact", "0.6", "monthly")]
+_sm = ['<?xml version="1.0" encoding="UTF-8"?>',
+       '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+for _p, _prio, _freq in _urls:
+    _loc = SITE_URL + ("/" if _p == "/" else _p)
+    _sm.append(f'  <url><loc>{_loc}</loc><lastmod>{_today}</lastmod>'
+               f'<changefreq>{_freq}</changefreq><priority>{_prio}</priority></url>')
+_sm.append('</urlset>')
+with open(os.path.join(OUT, "sitemap.xml"), "w", encoding="utf-8") as f:
+    f.write("\n".join(_sm) + "\n")
+with open(os.path.join(OUT, "robots.txt"), "w", encoding="utf-8") as f:
+    f.write(f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}/sitemap.xml\n")
+print("wrote sitemap.xml + robots.txt")
 print("done")

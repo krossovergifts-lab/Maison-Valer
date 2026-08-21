@@ -280,6 +280,28 @@
     });
   }
 
+  /* ---------- Quote prefill (from a product card's Get a Quote button) ---------- */
+  function bindQuotePrefill() {
+    var form = document.querySelector('.form');
+    if (!form) return;
+    var params = new URLSearchParams(window.location.search);
+    var sku = params.get('product');
+    var name = params.get('name');
+    if (!sku && !name) return;
+    var msg = form.querySelector('[name="message"]');
+    if (msg && !msg.value) {
+      var lead = window.MV_t ? window.MV_t('quote_prefill') : "I'd like a quote for ";
+      msg.value = lead + (name || '') + (sku ? ' (' + sku + ')' : '') + '.';
+    }
+    var sel = form.querySelector('[name="interest"]');
+    if (sel && name) {
+      for (var i = 0; i < sel.options.length; i++) {
+        if (sel.options[i].text.trim() === name.trim()) { sel.selectedIndex = i; break; }
+      }
+    }
+    try { form.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
+  }
+
   /* ---------- Contact form (client-side mailto) ---------- */
   function bindForm() {
     var form = document.querySelector('.form');
@@ -320,7 +342,7 @@
     bindTheme();
     bindI18n();          // sets lang + dir before layout-sensitive work
     bindHeader(); bindDrawer(); bindReveal(); bindParallax();
-    bindGalleries(); bindTitles(); bindFilter(); bindForm(); setYear();
+    bindGalleries(); bindTitles(); bindFilter(); bindForm(); bindQuotePrefill(); setYear();
     requestAnimationFrame(function () { document.body.classList.add('load'); });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
