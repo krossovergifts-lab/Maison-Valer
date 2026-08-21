@@ -785,3 +785,25 @@ main, footer, header { position: relative; z-index: 1; }
 }
 [dir="rtl"] .eyebrow { letter-spacing: .12em; }
 [dir="rtl"] .ribbon, [dir="rtl"] .side-rail { direction: ltr; }
+
+/* =========================================================
+   v2.1 — title line-reveal + no-link media
+   ========================================================= */
+.anim-title { }
+.anim-title .tl-line {
+  display: block; overflow: hidden;
+  padding: .16em .06em .20em; margin: -.14em -.06em -.18em;
+}
+.anim-title .tl-inner {
+  display: block; transform: translateY(118%);
+  transition: transform 1.05s var(--slow); transition-delay: var(--d, 0s);
+  will-change: transform;
+}
+.anim-title.in .tl-inner { transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .anim-title .tl-inner { transform: none !important; transition: none !important; }
+}
+
+/* media has no link now — base image fills the stage directly */
+.pcard-media { cursor: default; }
+.pcard-thumb { cursor: pointer; }

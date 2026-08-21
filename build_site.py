@@ -390,27 +390,27 @@ def footer():
 PRODUCTS = [
  dict(key="p1", sku="REXORA-11653", arch="strategist", cat="desk gifting",
       colors=[("brown",["organizer-brown-1","organizer-brown-2","organizer-brown-3"]),
-              ("black",["organizer-black-1","organizer-black-2"]),
-              ("gray", ["organizer-gray-1","organizer-gray-2"])]),
+              ("black",["organizer-black-1","organizer-black-2","organizer-black-3"]),
+              ("gray", ["organizer-gray-1","organizer-gray-2","organizer-gray-3"])]),
  dict(key="p2", sku="MAGTEC-11659", arch="minimalist", cat="travel everyday",
-      colors=[("brown",["cardholder-brown-1","cardholder-brown-2"]),
-              ("black",["cardholder-black-1"]),
-              ("gray", ["cardholder-gray-1"])]),
+      colors=[("brown",["cardholder-brown-1","cardholder-brown-2","cardholder-brown-3"]),
+              ("black",["cardholder-black-1","cardholder-black-2","cardholder-black-3"]),
+              ("gray", ["cardholder-gray-1","cardholder-gray-2","cardholder-gray-3"])]),
  dict(key="p3", sku="LEPORT-11662", arch="explorer", cat="travel gifting",
-      colors=[("brown",["travelwallet-brown-1","travelwallet-brown-2"]),
-              ("black",["travelwallet-black-1"]),
-              ("gray", ["travelwallet-gray-1"])]),
+      colors=[("brown",["travelwallet-brown-1","travelwallet-brown-2","travelwallet-brown-3"]),
+              ("black",["travelwallet-black-1","travelwallet-black-2","travelwallet-black-3"]),
+              ("gray", ["travelwallet-gray-1","travelwallet-gray-2","travelwallet-gray-3"])]),
  dict(key="p4", sku="LETHEG-11658", arch="identifier", cat="travel gifting",
-      colors=[("brown",["luggagetag-brown-1","luggagetag-brown-2"]),
-              ("black",["luggagetag-black-1"]),
-              ("gray", ["luggagetag-gray-1"])]),
+      colors=[("brown",["luggagetag-brown-1","luggagetag-brown-2","luggagetag-brown-3"]),
+              ("black",["luggagetag-black-1","luggagetag-black-2","luggagetag-black-3"]),
+              ("gray", ["luggagetag-gray-1","luggagetag-gray-2","luggagetag-gray-3"])]),
  dict(key="p5", sku="MAGFOLD-11656", arch="companion", cat="everyday desk",
-      colors=[("gray", ["foldstand-gray-1","foldstand-gray-2"]),
-              ("blue", ["foldstand-blue-1"]),
-              ("green",["foldstand-green-1"])]),
+      colors=[("gray", ["foldstand-gray-1","foldstand-gray-2","foldstand-gray-3"]),
+              ("blue", ["foldstand-blue-1","foldstand-blue-2","foldstand-blue-3"]),
+              ("green",["foldstand-green-1","foldstand-green-2","foldstand-green-3"])]),
  dict(key="p6", sku="MAGFOLDRA-11655", arch="reserve", cat="everyday desk",
-      colors=[("blue", ["powerbank-blue-1","powerbank-blue-2"]),
-              ("gray", ["powerbank-gray-1"])]),
+      colors=[("blue", ["powerbank-blue-1","powerbank-blue-2","powerbank-blue-3"]),
+              ("gray", ["powerbank-gray-1","powerbank-gray-2","powerbank-gray-3"])]),
 ]
 
 def swatch_buttons(p):
@@ -431,10 +431,8 @@ def product_card(p, delay=""):
         <div class="pcard-media">
           <span class="pcard-tag" {A("badge_new")}>{EN("badge_new")}</span>
           <span class="pcard-arch" {A("arch_"+p['arch'])}>{EN("arch_"+p['arch'])}</span>
-          <a class="pcard-link" href="collection.html" aria-label="{EN(namekey)}" data-i18n-aria="quick_look">
-            <img class="pcard-img" src="images/products/{first}.webp" alt="{EN(namekey)}" loading="lazy" width="1200" height="1200">
-          </a>
-          <div class="pcard-thumbs" aria-hidden="true"></div>
+          <img class="pcard-img" src="images/products/{first}.webp" alt="{EN(namekey)}" loading="lazy" width="1200" height="1200">
+          <div class="pcard-thumbs" aria-label="Views"></div>
         </div>
         <div class="pcard-body">
           <span class="sku">{p['sku']}</span>
