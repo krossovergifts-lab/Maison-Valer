@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Gift box base -->
+  <rect x="10" y="28" width="44" height="26" rx="3" stroke="#e8903a" stroke-width="1.8" fill="none"/>
+  <!-- Gift box lid -->
+  <rect x="8" y="22" width="48" height="8" rx="2" stroke="#e8903a" stroke-width="1.6" fill="none"/>
+  <!-- Vertical ribbon -->
+  <line x1="32" y1="22" x2="32" y2="54" stroke="#c1440e" stroke-width="2" stroke-linecap="round"/>
+  <!-- Horizontal ribbon -->
+  <line x1="10" y1="26" x2="54" y2="26" stroke="#c1440e" stroke-width="2" stroke-linecap="round"/>
+  <!-- Bow left loop -->
+  <path d="M32 22 C28 18 20 16 22 10 C24 6 30 10 32 14" stroke="#e8903a" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+  <!-- Bow right loop -->
+  <path d="M32 22 C36 18 44 16 42 10 C40 6 34 10 32 14" stroke="#e8903a" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+  <!-- Bow knot -->
+  <circle cx="32" cy="22" r="2.5" fill="#e8903a"/>
+  <!-- Star sparkle -->
+  <path d="M50 12 L51.2 15.6 L55 15.6 L52 17.8 L53.2 21.4 L50 19.2 L46.8 21.4 L48 17.8 L45 15.6 L48.8 15.6 Z" fill="#e8903a" opacity="0.7"/>
+</svg>
