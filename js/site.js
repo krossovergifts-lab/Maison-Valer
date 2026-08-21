@@ -1,5 +1,8 @@
 /* =========================================================
-   MAISON VALÉR — site behaviours
+   MAISON VALÉR — site behaviours (v2)
+   theme · header · drawer · reveal · parallax · filter ·
+   product gallery (colour-swap + hover/second image + thumbs) ·
+   i18n (EN / RU / AR + RTL) · contact form
    ========================================================= */
 (function () {
   'use strict';
@@ -8,21 +11,14 @@
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- Theme ---------- */
-  function storedTheme() {
-    try { return localStorage.getItem('mv-theme'); } catch (e) { return null; }
-  }
-  function saveTheme(t) {
-    try { localStorage.setItem('mv-theme', t); } catch (e) {}
-  }
+  function storedTheme() { try { return localStorage.getItem('mv-theme'); } catch (e) { return null; } }
+  function saveTheme(t) { try { localStorage.setItem('mv-theme', t); } catch (e) {} }
   function applyTheme(t) {
     root.setAttribute('data-theme', t);
     var meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.setAttribute('content', t === 'light' ? '#f2ebde' : '#14100c');
   }
-  var initial = storedTheme() ||
-    (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-  applyTheme(initial);
-
+  applyTheme(storedTheme() || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
   function bindTheme() {
     var toggle = document.querySelector('.theme-toggle');
     if (!toggle) return;
@@ -32,14 +28,63 @@
     });
   }
 
+  /* ---------- i18n (EN / RU / AR + RTL) ---------- */
+  function bindI18n() {
+    var I18N = window.MV_I18N || {};
+    var LANGS = window.MV_LANGS || ['en'];
+    var LOCAL = {
+      form_need: { en: 'Please add your name and email so we can reply.',
+                   ru: 'Пожалуйста, укажите имя и эл. почту, чтобы мы могли ответить.',
+                   ar: 'يرجى إضافة اسمك وبريدك الإلكتروني حتى نتمكن من الرد.' },
+      form_open: { en: 'Opening your email client to send this enquiry…',
+                   ru: 'Открываем почтовый клиент для отправки запроса…',
+                   ar: 'يتم فتح برنامج البريد لإرسال هذا الاستفسار…' }
+    };
+    function stored() { try { return localStorage.getItem('mv-lang'); } catch (e) { return null; } }
+    function save(l) { try { localStorage.setItem('mv-lang', l); } catch (e) {} }
+    var cur = stored() || 'en';
+    if (LANGS.indexOf(cur) < 0) cur = 'en';
+
+    function look(key) { var e = I18N[key] || LOCAL[key]; return e ? (e[cur] || e.en) : null; }
+    window.MV_t = function (key) { var v = look(key); return v == null ? key : v; };
+    window.MV_lang = function () { return cur; };
+
+    function apply() {
+      root.setAttribute('lang', cur);
+      root.setAttribute('dir', cur === 'ar' ? 'rtl' : 'ltr');
+      document.querySelectorAll('[data-i18n]').forEach(function (el) {
+        var v = look(el.getAttribute('data-i18n')); if (v != null) el.textContent = v;
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+        var v = look(el.getAttribute('data-i18n-html')); if (v != null) el.innerHTML = v;
+      });
+      document.querySelectorAll('[data-i18n-ph]').forEach(function (el) {
+        var v = look(el.getAttribute('data-i18n-ph')); if (v != null) el.setAttribute('placeholder', v);
+      });
+      document.querySelectorAll('[data-i18n-title]').forEach(function (el) {
+        var v = look(el.getAttribute('data-i18n-title'));
+        if (v != null) { el.setAttribute('title', v); el.setAttribute('aria-label', v); }
+      });
+      document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
+        var v = look(el.getAttribute('data-i18n-aria')); if (v != null) el.setAttribute('aria-label', v);
+      });
+      document.querySelectorAll('.lang-switch button').forEach(function (b) {
+        b.classList.toggle('active', b.getAttribute('data-lang') === cur);
+      });
+    }
+    function setLang(l) { if (LANGS.indexOf(l) < 0) return; cur = l; save(l); apply(); }
+    window.MV_setLang = setLang;
+    document.querySelectorAll('.lang-switch button').forEach(function (b) {
+      b.addEventListener('click', function () { setLang(b.getAttribute('data-lang')); });
+    });
+    apply();
+  }
+
   /* ---------- Header scroll state ---------- */
   function bindHeader() {
     var head = document.querySelector('.site-head');
     if (!head) return;
-    var onScroll = function () {
-      if (window.scrollY > 24) head.classList.add('scrolled');
-      else head.classList.remove('scrolled');
-    };
+    var onScroll = function () { head.classList.toggle('scrolled', window.scrollY > 24); };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
   }
@@ -55,9 +100,7 @@
       burger.setAttribute('aria-expanded', String(open));
       document.body.style.overflow = open ? 'hidden' : '';
     };
-    burger.addEventListener('click', function () {
-      toggle(!drawer.classList.contains('open'));
-    });
+    burger.addEventListener('click', function () { toggle(!drawer.classList.contains('open')); });
     drawer.querySelectorAll('a').forEach(function (a) {
       a.addEventListener('click', function () { toggle(false); });
     });
@@ -68,7 +111,7 @@
 
   /* ---------- Scroll reveal ---------- */
   function bindReveal() {
-    var els = document.querySelectorAll('.reveal, .img-reveal');
+    var els = document.querySelectorAll('.reveal');
     if (!els.length) return;
     if (reduceMotion || !('IntersectionObserver' in window)) {
       els.forEach(function (el) { el.classList.add('in'); });
@@ -102,6 +145,91 @@
     update();
   }
 
+  /* ---------- Product gallery: colour-swap + hover image + thumbnails ---------- */
+  function imgSrc(name) { return 'images/products/' + name + '.webp'; }
+
+  function setupCard(card) {
+    var jsonEl = card.querySelector('.pcard-json');
+    var media = card.querySelector('.pcard-media');
+    var baseImg = card.querySelector('.pcard-img');
+    var link = card.querySelector('.pcard-link');
+    var thumbs = card.querySelector('.pcard-thumbs');
+    if (!jsonEl || !media || !baseImg || !thumbs) return;
+
+    var data; try { data = JSON.parse(jsonEl.textContent); } catch (e) { return; }
+    var colors = (data.colors || []).filter(function (c) { return c.imgs && c.imgs.length; });
+    if (!colors.length) return;
+
+    // move base image out of the link so the hover layer can sit above it
+    if (link && baseImg.parentNode === link) media.insertBefore(baseImg, link);
+
+    // hover / second-image layer
+    var altImg = new Image();
+    altImg.className = 'pcard-img pcard-img--alt';
+    altImg.alt = ''; altImg.setAttribute('aria-hidden', 'true');
+    altImg.addEventListener('error', function () { media.classList.remove('has-alt'); });
+    media.insertBefore(altImg, thumbs);
+
+    var state = { color: colors[0], idx: 0 };
+
+    baseImg.addEventListener('error', function () {
+      if (baseImg._fb) return; baseImg._fb = 1; baseImg.src = imgSrc(colors[0].imgs[0]);
+    });
+
+    function setMain(i) {
+      state.idx = i;
+      var imgs = state.color.imgs;
+      baseImg._fb = 0;
+      baseImg.src = imgSrc(imgs[i]);
+      if (imgs.length > 1) {
+        altImg.src = imgSrc(imgs[(i + 1) % imgs.length]);
+        media.classList.add('has-alt');
+      } else {
+        media.classList.remove('has-alt');
+      }
+      thumbs.querySelectorAll('.pcard-thumb').forEach(function (t) {
+        t.classList.toggle('active', +t.getAttribute('data-idx') === i);
+      });
+    }
+
+    function buildThumbs() {
+      thumbs.innerHTML = '';
+      var imgs = state.color.imgs;
+      if (imgs.length < 2) return; // single image -> no strip
+      imgs.forEach(function (name, i) {
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'pcard-thumb' + (i === 0 ? ' active' : '');
+        b.setAttribute('data-idx', i);
+        b.setAttribute('aria-label', state.color.name + ' view ' + (i + 1));
+        var im = new Image(); im.loading = 'lazy'; im.alt = '';
+        im.addEventListener('error', function () { b.remove(); });
+        im.src = imgSrc(name);
+        b.appendChild(im);
+        b.addEventListener('mouseenter', function () { setMain(i); });
+        b.addEventListener('click', function (e) { e.preventDefault(); setMain(i); });
+        thumbs.appendChild(b);
+      });
+    }
+
+    function selectColor(c) { state.color = c; buildThumbs(); setMain(0); }
+
+    card.querySelectorAll('.swatch').forEach(function (sw) {
+      var key = sw.getAttribute('data-color');
+      var match = colors.filter(function (x) { return x.k === key; })[0];
+      sw.addEventListener('click', function () {
+        card.querySelectorAll('.swatch').forEach(function (s) { s.classList.remove('active'); });
+        sw.classList.add('active');
+        selectColor(match || colors[0]);
+      });
+    });
+
+    selectColor(colors[0]);
+  }
+
+  function bindGalleries() {
+    document.querySelectorAll('.pcard').forEach(setupCard);
+  }
+
   /* ---------- Collection filter ---------- */
   function bindFilter() {
     var bar = document.querySelector('.filterbar');
@@ -121,29 +249,31 @@
     });
   }
 
-  /* ---------- Contact form (client-side) ---------- */
+  /* ---------- Contact form (client-side mailto) ---------- */
   function bindForm() {
     var form = document.querySelector('.form');
     if (!form) return;
     var status = form.querySelector('.form-status');
+    var T = function (k) { return window.MV_t ? window.MV_t(k) : k; };
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var name = form.querySelector('[name="name"]');
       var email = form.querySelector('[name="email"]');
       if (!name.value.trim() || !email.value.trim()) {
-        if (status) status.textContent = 'Please add your name and email so we can reply.';
+        if (status) status.textContent = T('form_need');
         return;
       }
+      var val = function (n) { var el = form.querySelector('[name="' + n + '"]'); return el ? el.value : ''; };
       var subject = encodeURIComponent('Maison Valér — Enquiry from ' + name.value.trim());
       var body = encodeURIComponent(
         'Name: ' + name.value.trim() +
         '\nEmail: ' + email.value.trim() +
-        '\nCompany: ' + (form.querySelector('[name="company"]') || {}).value +
-        '\nInterest: ' + (form.querySelector('[name="interest"]') || {}).value +
-        '\nQuantity: ' + (form.querySelector('[name="quantity"]') || {}).value +
-        '\n\n' + (form.querySelector('[name="message"]') || {}).value
+        '\nCompany: ' + val('company') +
+        '\nInterest: ' + val('interest') +
+        '\nQuantity: ' + val('quantity') +
+        '\n\n' + val('message')
       );
-      if (status) status.textContent = 'Opening your email client to send this enquiry…';
+      if (status) status.textContent = T('form_open');
       window.location.href = 'mailto:hello@maisonvaler.com?subject=' + subject + '&body=' + body;
     });
   }
@@ -156,8 +286,10 @@
 
   /* ---------- Init ---------- */
   function init() {
-    bindTheme(); bindHeader(); bindDrawer(); bindReveal();
-    bindParallax(); bindFilter(); bindForm(); setYear();
+    bindTheme();
+    bindI18n();          // sets lang + dir before layout-sensitive work
+    bindHeader(); bindDrawer(); bindReveal(); bindParallax();
+    bindGalleries(); bindFilter(); bindForm(); setYear();
     requestAnimationFrame(function () { document.body.classList.add('load'); });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
