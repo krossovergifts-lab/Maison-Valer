@@ -884,3 +884,12 @@ main, footer, header { position: relative; z-index: 1; }
 @media (hover: none) { .pcard-nav { display: none !important; } }  /* mobile swipes instead */
 [dir="rtl"] .pcard-nav--prev { left: auto; right: 10px; }
 [dir="rtl"] .pcard-nav--next { right: auto; left: 10px; }
+
+/* =========================================================
+   v2.5 — footer brand: centre the logo lockup
+   ========================================================= */
+.foot-brand { text-align: center; }
+.foot-brand .mono,
+.foot-brand .wordmark,
+.foot-brand .tagline { margin-left: auto; margin-right: auto; }
+.foot-brand p { margin-left: auto; margin-right: auto; }
