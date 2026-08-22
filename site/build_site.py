@@ -21,7 +21,7 @@ def jsonld_site():
     org = {
         "@type": "Organization", "name": BRAND, "url": SITE_URL + "/",
         "logo": SITE_IMG.get("heroImage") or (SITE_URL + "/images/hero-desk.webp"),
-        "email": EMAIL,
+        "email": "hello@maisonvaler.com",
         "description": "Maison Valér crafts premium leather essentials for work, travel and executive gifting — the language of considered design.",
         "areaServed": "AE",
         "address": {"@type": "PostalAddress", "addressLocality": "Dubai", "addressCountry": "AE"},
@@ -411,10 +411,9 @@ def footer():
       </div>
       <div class="foot-col">
         <h5 {A("foot_connect")}>{EN("foot_connect")}</h5>
-        <a href="mailto:{EMAIL}">{EMAIL}</a>
+        <a href="mailto:hello@maisonvaler.com">hello@maisonvaler.com</a>
         <a href="contact.html" {A("c_studio_v")}>{EN("c_studio_v")}</a>
         <a href="contact.html" {A("foot_trade")}>{EN("foot_trade")}</a>
-        {foot_social()}
       </div>
     </div>
     <div class="foot-bottom">
@@ -463,16 +462,6 @@ PRODUCTS = [
 CATEGORIES = None          # [{"value","title":{en,ru,ar},"order"}]
 D2D_ARCHS  = None          # built from products tagged 'desk'
 SITE_IMG   = {}            # editorial images from backend {slot: url}
-EMAIL      = "hello@maisonvaler.com"   # overridden by Site Settings if present
-SOCIAL     = []            # [{platform, url}] from Site Settings
-
-def foot_social():
-    if not SOCIAL:
-        return ""
-    links = "".join(
-        f'<a href="{s["url"]}" target="_blank" rel="noopener">{s["platform"]}</a>'
-        for s in SOCIAL if s.get("url") and s.get("platform"))
-    return links
 
 def ed_img(slot, default_local):
     """Editorial image: backend URL if set, else the bundled local file."""
@@ -488,24 +477,13 @@ def _tri(v):
     return {"en": v, "ru": v, "ar": v}
 
 def load_from_sanity(path="products.json"):
-    global PRODUCTS, CATEGORIES, D2D_ARCHS, SITE_IMG, EMAIL, SOCIAL
+    global PRODUCTS, CATEGORIES, D2D_ARCHS, SITE_IMG
     if not os.path.exists(path):
         return False
     data = json.load(open(path, encoding="utf-8"))
     cats = data.get("categories", [])
     prods = data.get("products", [])
     SITE_IMG = {k: v for k, v in (data.get("siteImages") or {}).items() if v}
-    st = data.get("settings") or {}
-    if st.get("email"):
-        EMAIL = st["email"]
-    if st.get("social"):
-        SOCIAL = [s for s in st["social"] if s.get("url") and s.get("platform")]
-    if st.get("ctaLabel"):
-        TR["cta_enquire"] = _tri(st["ctaLabel"])
-    if st.get("footerNote"):
-        TR["foot_brand_desc"] = _tri(st["footerNote"])
-    if st.get("location"):
-        TR["c_studio_v"] = _tri(st["location"])
     if not prods:
         return False
 
@@ -925,7 +903,7 @@ def page_contact():
         <h1 class="display" style="font-size:clamp(40px,7vw,96px);margin-top:16px" {AH("contact_h")}>{TR["contact_h"]["en"]}</h1>
         <p class="lede" style="margin-top:26px" {A("contact_lede")}>{EN("contact_lede")}</p>
         <div class="contact-side" style="margin-top:52px">
-          <div class="contact-item"><p class="k" {A("c_email")}>{EN("c_email")}</p><a class="v" href="mailto:{EMAIL}">{EMAIL}</a></div>
+          <div class="contact-item"><p class="k" {A("c_email")}>{EN("c_email")}</p><a class="v" href="mailto:hello@maisonvaler.com">hello@maisonvaler.com</a></div>
           <div class="contact-item"><p class="k" {A("c_studio")}>{EN("c_studio")}</p><p class="v" {A("c_studio_v")}>{EN("c_studio_v")}</p></div>
           <div class="contact-item"><p class="k" {A("c_trade")}>{EN("c_trade")}</p><p class="v" {A("c_trade_v")}>{EN("c_trade_v")}</p></div>
         </div>
@@ -955,7 +933,7 @@ def page_contact():
             <button class="btn btn--solid" type="submit"><span {A("btn_send")}>{EN("btn_send")}</span> {ARW}</button>
             <span class="form-status" role="status" aria-live="polite"></span>
           </div>
-          <p class="form-note"><span {A("form_note")}>{EN("form_note")}</span> <a href="mailto:{EMAIL}" style="color:var(--cognac)">{EMAIL}</a></p>
+          <p class="form-note"><span {A("form_note")}>{EN("form_note")}</span> <a href="mailto:hello@maisonvaler.com" style="color:var(--cognac)">hello@maisonvaler.com</a></p>
         </form>
       </div>
     </div>

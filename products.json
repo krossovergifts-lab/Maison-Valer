@@ -493,5 +493,24 @@
     }
    ]
   }
- ]
+ ],
+ "siteImages": {},
+ "settings": {
+  "email": "hello@maisonvaler.com",
+  "location": {
+   "en": "Dubai · United Arab Emirates",
+   "ru": "Дубай, Объединенные Арабские Эмираты ",
+   "ar": "دبي، الإمارات العربية المتحدة"
+  },
+  "footerNote": {
+   "en": "Leather essentials shaped for professionals who move between the desk and the world. Refined in form, purposeful in function.",
+   "ru": "Кожаные предметы первой необходимости для профессионалов, которые перемещаются между рабочим столом и миром. Изысканный по форме, целеустремленный по функции.",
+   "ar": "أساسيات جلدية مصممة للمحترفين الذين يتنقلون بين المكتب والعالم. مصقول في الشكل، هادف في الوظيفة."
+  },
+  "ctaLabel": {
+   "en": "Enquire",
+   "ru": "Подробнее",
+   "ar": "استفسار"
+  }
+ }
 }

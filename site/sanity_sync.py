@@ -40,10 +40,6 @@ GROQ = """{
     "aboutImage1": aboutImage1.asset->url,
     "aboutImage2": aboutImage2.asset->url,
     "extras": extraImages[]{key, "url": image.asset->url}
-  },
-  "settings": *[_type=="siteSettings"][0]{
-    email, whatsapp, location, footerNote, ctaLabel,
-    "social": social[]{platform, url}
   }
 }"""
 
@@ -157,23 +153,9 @@ def main():
         if ex.get("key") and ex.get("url"):
             site_images[ex["key"]] = ex["url"] + EDIT_PARAMS
 
-    # site settings (contact / footer / labels / socials)
-    s_in = res.get("settings") or {}
-    settings = {}
-    if s_in.get("email"):      settings["email"] = s_in["email"]
-    if s_in.get("whatsapp"):   settings["whatsapp"] = s_in["whatsapp"]
-    if s_in.get("location"):   settings["location"] = tri(s_in["location"])
-    if s_in.get("footerNote"): settings["footerNote"] = tri(s_in["footerNote"])
-    if s_in.get("ctaLabel"):   settings["ctaLabel"] = tri(s_in["ctaLabel"])
-    if s_in.get("social"):
-        settings["social"] = [{"platform": x.get("platform"), "url": x.get("url")}
-                              for x in s_in["social"] if x.get("url") and x.get("platform")]
-
-    json.dump({"categories": categories, "products": products,
-               "siteImages": site_images, "settings": settings},
+    json.dump({"categories": categories, "products": products, "siteImages": site_images},
               open("products.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-    print(f"Wrote products.json  ({len(products)} products, {len(categories)} categories, "
-          f"{len(site_images)} site images, settings: {'yes' if settings else 'none'}).")
+    print(f"Wrote products.json  ({len(products)} products, {len(categories)} categories, {len(site_images)} site images).")
     print("Now run:  python build_site.py")
 
 if __name__ == "__main__":
