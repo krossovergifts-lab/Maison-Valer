@@ -327,8 +327,7 @@ main, footer, header { position: relative; z-index: 1; }
 .drawer.open a:nth-child(4){ animation-delay: .30s; }
 .drawer.open a:nth-child(5){ animation-delay: .36s; }
 .drawer a .n {
-  font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: .2em;
-  color: var(--cognac); font-variation-settings: normal;
+  display: none;
 }
 @keyframes drawerIn { to { opacity: 1; transform: translateY(0); } }
 

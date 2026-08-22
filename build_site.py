@@ -353,7 +353,7 @@ def header(page):
         links += f'<a href="{href}"{cur} {A(key)}>{EN(key)}</a>'
     draw = ""
     for i, (href, key, k) in enumerate(NAV_ITEMS, 1):
-        draw += f'<a href="{href}"><span class="n">0{i}</span><span {A(key)}>{EN(key)}</span></a>'
+        draw += f'<a href="{href}"><span {A(key)}>{EN(key)}</span></a>'
     over = " over-dark" if page in ("home", "d2d") else ""
     return f'''
 <header class="site-head{over}">
