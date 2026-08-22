@@ -840,3 +840,16 @@ main, footer, header { position: relative; z-index: 1; }
 [dir="rtl"] .pcard-cta::before { transform: translateX(101%); }
 [dir="rtl"] .pcard-cta:hover::before { transform: translateX(0); }
 [dir="rtl"] .pcard-cta:hover .arw { transform: scaleX(-1) translateX(5px); }
+
+/* =========================================================
+   v2.3 — filter bar hugs its content (no oversized pill)
+   ========================================================= */
+.filterbar { width: fit-content; max-width: 100%; }
+@media (max-width: 600px) {
+  .filterbar {
+    flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .filterbar::-webkit-scrollbar { display: none; }
+  .filterbar .chip { flex: 0 0 auto; }
+}

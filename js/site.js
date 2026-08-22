@@ -226,6 +226,25 @@
     });
 
     selectColor(colors[0]);
+
+    // touch swipe: swipe left = next image, swipe right = previous (cycles)
+    var sx = null, sy = null;
+    media.addEventListener('touchstart', function (e) {
+      sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+    }, { passive: true });
+    media.addEventListener('touchend', function (e) {
+      if (sx == null) return;
+      var dx = e.changedTouches[0].clientX - sx;
+      var dy = e.changedTouches[0].clientY - sy;
+      sx = sy = null;
+      if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return; // ignore taps / vertical scrolls
+      var imgs = state.color.imgs;
+      if (imgs.length < 2) return;
+      var rtl = document.documentElement.dir === 'rtl';
+      var fwd = rtl ? dx > 0 : dx < 0;
+      var n = imgs.length;
+      setMain(fwd ? (state.idx + 1) % n : (state.idx - 1 + n) % n);
+    }, { passive: true });
   }
 
   function bindGalleries() {

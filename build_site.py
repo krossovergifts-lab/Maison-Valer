@@ -10,6 +10,8 @@ SITE_URL = os.environ.get("MV_SITE_URL", "https://maisonvaler.com").rstrip("/")
 BRAND = "Maison Valér"
 PATHS = {"home": "/", "collection": "/collection", "d2d": "/desk-to-destinations",
          "about": "/about", "contact": "/contact"}
+# Category values to hide from the collection filter bar (products stay under "All")
+EXCLUDE_FILTERS = {"everyday", "gifting"}
 
 def _abs(u):
     u = str(u)
@@ -715,7 +717,10 @@ def page_collection():
         coll = PRODUCTS
     dl = ["","d1","d2"]
     cards = "".join(product_card(p, dl[i % 3]) for i, p in enumerate(coll))
-    filter_keys = ["all"] + [c["value"] for c in CATEGORIES] if CATEGORIES else ["all","desk","travel","everyday","gifting"]
+    if CATEGORIES:
+        filter_keys = ["all"] + [c["value"] for c in CATEGORIES if c["value"] not in EXCLUDE_FILTERS]
+    else:
+        filter_keys = ["all", "desk", "travel"]
     filters = "".join(
         f'<button class="chip{" active" if k=="all" else ""}" data-filter="{k}" {A("filter_"+k)}>{EN("filter_"+k)}</button>'
         for k in filter_keys)
