@@ -494,7 +494,9 @@
    ]
   }
  ],
- "siteImages": {},
+ "siteImages": {
+  "homeImage1": "https://cdn.sanity.io/images/epxj3lh6/production/5bfe8e5df7f66acb1713a827d97890f6f983e8a9-880x1100.webp?w=1800&auto=format"
+ },
  "settings": {
   "email": "hello@maisonvaler.com",
   "location": {
