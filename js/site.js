@@ -165,30 +165,41 @@
     var colors = (data.colors || []).filter(function (c) { return c.imgs && c.imgs.length; });
     if (!colors.length) return;
 
-    // hover / second-image layer
-    var altImg = new Image();
-    altImg.className = 'pcard-img pcard-img--alt';
-    altImg.alt = ''; altImg.setAttribute('aria-hidden', 'true');
-    altImg.addEventListener('error', function () { media.classList.remove('has-alt'); });
-    media.insertBefore(altImg, thumbs);
-
     var state = { color: colors[0], idx: 0 };
 
     baseImg.addEventListener('error', function () {
       if (baseImg._fb) return; baseImg._fb = 1; baseImg.src = imgSrc(colors[0].imgs[0]);
     });
 
+    // prev / next arrows (desktop click nav; hidden on touch, which uses swipe)
+    function navBtn(dir, label) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'pcard-nav pcard-nav--' + (dir < 0 ? 'prev' : 'next');
+      b.setAttribute('aria-label', label);
+      b.innerHTML = dir < 0
+        ? '<svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+        : '<svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      b.addEventListener('click', function (e) { e.preventDefault(); step(dir); });
+      return b;
+    }
+    var prevB = navBtn(-1, 'Previous image');
+    var nextB = navBtn(1, 'Next image');
+    media.appendChild(prevB); media.appendChild(nextB);
+
+    function step(dir) {
+      var n = state.color.imgs.length;
+      if (n < 2) return;
+      setMain((state.idx + dir + n) % n);
+    }
+
     function setMain(i) {
-      state.idx = i;
       var imgs = state.color.imgs;
+      i = (i + imgs.length) % imgs.length;
+      state.idx = i;
       baseImg._fb = 0;
       baseImg.src = imgSrc(imgs[i]);
-      if (imgs.length > 1) {
-        altImg.src = imgSrc(imgs[(i + 1) % imgs.length]);
-        media.classList.add('has-alt');
-      } else {
-        media.classList.remove('has-alt');
-      }
+      baseImg.alt = state.color.name;
       thumbs.querySelectorAll('.pcard-thumb').forEach(function (t) {
         t.classList.toggle('active', +t.getAttribute('data-idx') === i);
       });
@@ -197,7 +208,9 @@
     function buildThumbs() {
       thumbs.innerHTML = '';
       var imgs = state.color.imgs;
-      if (imgs.length < 2) return; // single image -> no strip
+      var multi = imgs.length > 1;
+      media.classList.toggle('multi', multi);
+      if (!multi) return;                // single image -> no strip, no arrows
       imgs.forEach(function (name, i) {
         var b = document.createElement('button');
         b.type = 'button'; b.className = 'pcard-thumb' + (i === 0 ? ' active' : '');
@@ -207,8 +220,7 @@
         im.addEventListener('error', function () { b.remove(); });
         im.src = imgSrc(name);
         b.appendChild(im);
-        b.addEventListener('mouseenter', function () { setMain(i); });
-        b.addEventListener('click', function (e) { e.preventDefault(); setMain(i); });
+        b.addEventListener('click', function (e) { e.preventDefault(); setMain(i); });  // CLICK only
         thumbs.appendChild(b);
       });
     }
@@ -227,7 +239,7 @@
 
     selectColor(colors[0]);
 
-    // touch swipe: swipe left = next image, swipe right = previous (cycles)
+    // touch swipe: left = next image, right = previous (cycles)
     var sx = null, sy = null;
     media.addEventListener('touchstart', function (e) {
       sx = e.touches[0].clientX; sy = e.touches[0].clientY;
@@ -237,13 +249,9 @@
       var dx = e.changedTouches[0].clientX - sx;
       var dy = e.changedTouches[0].clientY - sy;
       sx = sy = null;
-      if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return; // ignore taps / vertical scrolls
-      var imgs = state.color.imgs;
-      if (imgs.length < 2) return;
+      if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return; // ignore taps / vertical scroll
       var rtl = document.documentElement.dir === 'rtl';
-      var fwd = rtl ? dx > 0 : dx < 0;
-      var n = imgs.length;
-      setMain(fwd ? (state.idx + 1) % n : (state.idx - 1 + n) % n);
+      step((rtl ? dx > 0 : dx < 0) ? 1 : -1);
     }, { passive: true });
   }
 

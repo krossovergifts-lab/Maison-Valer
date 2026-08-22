@@ -853,3 +853,32 @@ main, footer, header { position: relative; z-index: 1; }
   .filterbar::-webkit-scrollbar { display: none; }
   .filterbar .chip { flex: 0 0 auto; }
 }
+
+/* =========================================================
+   v2.4 — e-commerce gallery: no hover-swap, click thumbs,
+   swipe (mobile) + arrows (desktop)
+   ========================================================= */
+/* remove any hover second-image behaviour completely */
+.pcard-img--alt { display: none !important; }
+.pcard-media.has-alt:hover .pcard-img--alt { opacity: 0 !important; }
+
+/* thumbnails: always visible, change on CLICK only */
+.pcard-thumbs { opacity: 1 !important; transform: none !important; }
+
+/* prev / next arrows — desktop only (touch uses swipe) */
+.pcard-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  z-index: 5; width: 34px; height: 34px; border-radius: 50%;
+  display: none; align-items: center; justify-content: center;
+  color: #fff; cursor: pointer; padding: 0;
+  border: 1px solid rgba(255,255,255,.55); background: rgba(20,16,12,.42);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  transition: background .2s, transform .2s;
+}
+.pcard-nav:hover { background: rgba(20,16,12,.7); }
+.pcard-nav--prev { left: 10px; }
+.pcard-nav--next { right: 10px; }
+.pcard-media.multi:hover .pcard-nav { display: flex; }
+@media (hover: none) { .pcard-nav { display: none !important; } }  /* mobile swipes instead */
+[dir="rtl"] .pcard-nav--prev { left: auto; right: 10px; }
+[dir="rtl"] .pcard-nav--next { right: auto; left: 10px; }
