@@ -291,15 +291,30 @@
    "colors": [
     {
      "colorKey": "brown",
-     "imgs": []
+     "imgs": [
+      "https://cdn.sanity.io/images/epxj3lh6/production/7f05b7edf6434038cf9da153ff4625c6c51b0b95-1920x1920.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/6d77dcecfbab5c49ce87c1efc17b02106fcc1b51-1920x1920.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/d9a189599e99a48b7395ef018dbb1b1954796931-1920x1920.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/b127582bc9fd92db4f3c564943277ffa7e46f126-1920x1920.webp?w=1200&h=1200&fit=crop&auto=format"
+     ]
     },
     {
      "colorKey": "black",
-     "imgs": []
+     "imgs": [
+      "https://cdn.sanity.io/images/epxj3lh6/production/724f7b3765b050853e52889e23c1b3086731b959-1920x1920.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/b1be29727cd89af1839daed8b552daa4abc261f8-1920x1920.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/4fa6d9920f6b9a59eb6dacb4035bdd83e35616dd-1920x1920.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/afd75abb3bcc89ebb4fcdcd43c209e1fa5b658e0-1920x1920.webp?w=1200&h=1200&fit=crop&auto=format"
+     ]
     },
     {
      "colorKey": "gray",
-     "imgs": []
+     "imgs": [
+      "https://cdn.sanity.io/images/epxj3lh6/production/898ab027bc440154ff776d327c38e5522efabd60-1920x1920.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/9c8cc8ef6fc242ff3f31ea262a0662ac36d801e7-1920x1920.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/504d3d6550c927f00e9f8cb955bf5b7f2c21f156-1920x1920.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/37ed28f00e0668c38747583d0ff838f46193f495-1920x1920.webp?w=1200&h=1200&fit=crop&auto=format"
+     ]
     }
    ],
    "d2dRole": {
