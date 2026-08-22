@@ -1,0 +1,29 @@
+MAISON VALER - ONE-CLICK PUBLISH
+
+WHAT IT DOES
+Turns the three manual commands (sync -> build -> push) into a single
+double-click. Use it whenever you or your junior have uploaded and
+PUBLISHED new product images in the Sanity Studio.
+
+SETUP (once)
+1. Put sync.bat in your site repo folder:
+   C:\Users\Admin\Desktop\Maison-Valer-main
+   (the same folder that has build_site.py and sanity_sync.py)
+
+HOW TO USE (every time)
+1. Upload + PUBLISH the images in maison-valer.sanity.studio
+2. Double-click sync.bat
+3. A black window opens and runs everything. When it says
+   "DONE ... live in about 1-2 minutes", you can close it.
+4. Wait ~2 minutes, then hard-refresh the live site (Ctrl+Shift+R).
+
+NOTES
+- If it says "Nothing new to publish", the site already matches the
+  backend - nothing to do.
+- If it shows an error, read the last lines (or screenshot them).
+  Nothing is forced, so a failed run won't break anything.
+- First run of the day may take a minute while it translates any new
+  text; later runs are faster (translations are cached).
+
+TIP: Right-click sync.bat -> Send to -> Desktop (create shortcut)
+so you have a one-click icon on your desktop.

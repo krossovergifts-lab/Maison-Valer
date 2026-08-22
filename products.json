@@ -371,15 +371,30 @@
    "colors": [
     {
      "colorKey": "gray",
-     "imgs": []
+     "imgs": [
+      "https://cdn.sanity.io/images/epxj3lh6/production/c9b2ff1b4874f26c96c0eaf2e04a8bd3b52a3815-3000x3000.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/95e3257749435c48829151ecd7d05709298654ba-3000x3000.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/0162d698072fe02d2be6b8b527fc2b10b9bdfbd3-3000x3000.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/ec7502bbc998ab769070d35c03a77c5c35751272-3000x3000.webp?w=1200&h=1200&fit=crop&auto=format"
+     ]
     },
     {
      "colorKey": "blue",
-     "imgs": []
+     "imgs": [
+      "https://cdn.sanity.io/images/epxj3lh6/production/1601e043189ad44439026cecf06abb4612869573-3000x3000.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/a0c77f783596d77f4c87e928b66bc30e77c4c1e6-3000x3000.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/d6de559246139fff51db56f155768e2a00601240-3000x3000.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/50eab2d3e3fc04acabc23acfea18c76d67ece461-3000x3000.webp?w=1200&h=1200&fit=crop&auto=format"
+     ]
     },
     {
      "colorKey": "green",
-     "imgs": []
+     "imgs": [
+      "https://cdn.sanity.io/images/epxj3lh6/production/95a71a0227035d40e9f67c9f29ada53937502db3-3000x3000.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/8b2fe0de0316663e28b6e27cba1061a308e290de-3000x3000.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/ee63a3859b733abf0bdc7fab29b13f2fed677a38-3000x3000.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/fdaf5b13963111c6601e76bf4a8ccd77178fe626-3000x3000.webp?w=1200&h=1200&fit=crop&auto=format"
+     ]
     }
    ]
   },
