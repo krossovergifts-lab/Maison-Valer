@@ -78,15 +78,30 @@
    "colors": [
     {
      "colorKey": "brown",
-     "imgs": []
+     "imgs": [
+      "https://cdn.sanity.io/images/epxj3lh6/production/46f74dcfc23d13197a5c81e1fd8ba2dff0b15cde-1920x1920.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/2facc0e7778d74a879cf7e1e5215bfc1a4061a46-2000x2000.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/ae0c4eef234fc4d491f2663f3cd7bfe9605f5b7b-2000x2000.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/6c83dc5c3d80c2d0cf37d68c87f88457fd7dbbcc-2000x2000.webp?w=1200&h=1200&fit=crop&auto=format"
+     ]
     },
     {
      "colorKey": "black",
-     "imgs": []
+     "imgs": [
+      "https://cdn.sanity.io/images/epxj3lh6/production/4e6679ae6a6a0ead96e410560c185f5df4b5daec-1920x1920.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/b615158470cb4d3ba74fc88fccc099c81fd4dae1-2000x2000.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/a393d2e445c72b8008e1e6c145a74e6794da770f-2000x2000.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/dd757e2526aebc4c76b1321690b0a8c5a3f6f9df-2000x2000.webp?w=1200&h=1200&fit=crop&auto=format"
+     ]
     },
     {
      "colorKey": "gray",
-     "imgs": []
+     "imgs": [
+      "https://cdn.sanity.io/images/epxj3lh6/production/2f95d2b06ca8a762b2db43f47a73f701f7f445c7-1920x1920.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/75bd98b4e30c67fec49ae6d632a16e001769cce2-2000x2000.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/e29ddbdd3d8b3302ea10a1b978dc2217d041d92a-2000x2000.webp?w=1200&h=1200&fit=crop&auto=format",
+      "https://cdn.sanity.io/images/epxj3lh6/production/12a9d9d62fe9a7a20691920cc37f04153f56d694-2000x2000.webp?w=1200&h=1200&fit=crop&auto=format"
+     ]
     }
    ],
    "d2dRole": {
