@@ -98,6 +98,7 @@
     var toggle = function (open) {
       burger.classList.toggle('open', open);
       drawer.classList.toggle('open', open);
+      document.body.classList.toggle('menu-open', open);
       burger.setAttribute('aria-expanded', String(open));
       document.body.style.overflow = open ? 'hidden' : '';
     };
