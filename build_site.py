@@ -293,8 +293,9 @@ IC_GIFT='<svg class="ic" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rec
 MONO = '<span class="mono" aria-hidden="true"></span>'
 
 def wordmark():
-    return ('<span class="wordmark"><span class="maison">Maison</span>'
-            '<span class="valer">Valér</span></span>')
+    return '<span class="wordmark" role="img" aria-label="Maison Valér"></span>'
+
+TAGLINE = '<span class="tagline" role="img" aria-label="Style With Purpose"></span>'
 
 def lang_switch(cls=""):
     btns = "".join(
@@ -391,6 +392,7 @@ def footer():
       <div class="foot-brand">
         {MONO}
         {wordmark()}
+        {TAGLINE}
         <p {A("foot_brand_desc")}>{EN("foot_brand_desc")}</p>
       </div>
       <div class="foot-col">

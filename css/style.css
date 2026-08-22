@@ -206,19 +206,21 @@ main, footer, header { position: relative; z-index: 1; }
   -webkit-mask: url('../images/monogram.png') center/contain no-repeat;
           mask: url('../images/monogram.png') center/contain no-repeat;
   background: currentColor;
-  display: inline-block;
+  display: inline-block; aspect-ratio: 1.25 / 1;
 }
 
-/* Wordmark */
-.wordmark { display: inline-flex; flex-direction: column; line-height: 1; }
-.wordmark .maison {
-  font-family: var(--sans); font-weight: 500;
-  letter-spacing: .5em; text-transform: uppercase;
-  font-size: .5em; padding-left: .12em; color: var(--bone);
+/* Wordmark + tagline (real logo artwork, theme-aware via mask) */
+.wordmark {
+  display: inline-block; aspect-ratio: 2.273 / 1; color: var(--bone);
+  background: currentColor;
+  -webkit-mask: url('../images/wordmark.png') left center/contain no-repeat;
+          mask: url('../images/wordmark.png') left center/contain no-repeat;
 }
-.wordmark .valer {
-  font-family: var(--serif); font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
-  font-weight: 440; letter-spacing: .04em; color: var(--bone);
+.tagline {
+  display: inline-block; aspect-ratio: 6.486 / 1; color: var(--taupe);
+  background: currentColor;
+  -webkit-mask: url('../images/tagline.png') left center/contain no-repeat;
+          mask: url('../images/tagline.png') left center/contain no-repeat;
 }
 
 /* =========================================================
@@ -247,10 +249,9 @@ main, footer, header { position: relative; z-index: 1; }
   width: 100%; max-width: var(--wrap); margin-inline: auto; padding-inline: var(--pad);
   display: flex; align-items: center; justify-content: space-between; gap: 24px;
 }
-.brand { display: flex; align-items: center; gap: 13px; flex-shrink: 0; }
-.brand .mono { width: 26px; height: 26px; color: var(--bone); }
-.brand .wordmark .valer { font-size: 21px; }
-.brand .wordmark .maison { font-size: 9px; letter-spacing: .42em; }
+.brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.brand .mono { width: auto; height: 34px; color: var(--bone); }
+.brand .wordmark { height: 30px; width: auto; }
 
 .nav { display: flex; align-items: center; gap: clamp(16px, 2vw, 32px); }
 .nav a {
@@ -607,8 +608,9 @@ main, footer, header { position: relative; z-index: 1; }
    ========================================================= */
 .site-foot { border-top: 1px solid var(--line); padding-block: clamp(56px, 7vw, 90px) 40px; background: var(--coal); }
 .foot-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: clamp(28px, 4vw, 60px); }
-.foot-brand .mono { width: 34px; height: 34px; color: var(--bone); margin-bottom: 20px; }
-.foot-brand .wordmark .valer { font-size: 30px; }
+.foot-brand .mono { width: auto; height: 42px; color: var(--bone); margin-bottom: 14px; display: block; }
+.foot-brand .wordmark { height: 44px; width: auto; display: block; }
+.foot-brand .tagline { height: 13px; width: auto; display: block; margin-top: 12px; opacity: .85; }
 .foot-brand p { color: var(--taupe); font-size: 14px; max-width: 34ch; margin-top: 18px; line-height: 1.7; }
 .foot-col h5 { font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--faint); margin-bottom: 20px; }
 .foot-col a { display: block; color: var(--taupe); font-size: 14px; padding: 7px 0; transition: color .3s; }
